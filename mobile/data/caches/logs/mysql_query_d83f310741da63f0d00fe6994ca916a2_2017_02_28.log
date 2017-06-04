@@ -1,6 +1,0 @@
-INSERT INTO `xingsom`.`ecs_sessions` (sesskey, expiry, ip, data) VALUES ('c1a1efaf535247c9a5dc43e370745622', '1488249181', '180.153.206.18', 'a:0:{}')
-
-SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
-
-UPDATE `xingsom`.`ecs_sessions` SET expiry = '1488249181', ip = '180.153.206.18', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='0', email='0', data = 'a:0:{}' WHERE sesskey = 'c1a1efaf535247c9a5dc43e370745622' LIMIT 1
-
