@@ -982,6 +982,7 @@ class OrderModel extends BaseModel {
                             100 / $total['market_price']) . '%' : 0;
         }
         $total['goods_price'] = price_format($total['goods_price'], false);
+        $total['total_price'] = $total['goods_price'];
         $total['market_price'] = price_format($total['market_price'], false);
         $total['real_goods_count'] = $real_goods_count;
         $total['virtual_goods_count'] = $virtual_goods_count;
