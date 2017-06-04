@@ -1,0 +1,35 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <div class="goods_tp_box" id="goodsInfo"> 
+    	<!-- {if $pictures}--> 
+    	<a href="{$pictures.0.img_url}" class="MagicZoomPlus"  target="_blank" id="Zoom" rel="hint-text: ; selectors-effect: false; selectors-class: on; zoom-distance: 22;zoom-width: 430; zoom-height: 430;" >
+    		<img src="{$pictures.0.img_url}" alt="{$goods.goods_name|escape:html}" style="width:478px; height:478px;" />
+    	</a> 
+    	<!-- {/if}-->
+        <p class="btn_goods_link_box">
+        	<a id="show_big_img" target="_blank" href="{$pictures.0.img_url}">
+				<img alt="{$goods.goods_name|escape:html}" src="images/btn_big_goods_new.gif">
+			</a>
+        </p>
+        <p class="goods_s_tp_title ">
+			<img src="images/goods_s_title.gif">
+		</p> 
+  		<div class="zoomList s_tp " >
+    		<ul class="s_tpc clearfix">
+      				<!-- {if $pictures}--> 
+              		<!-- {foreach from=$pictures item=picture name=foo}-->
+              		<li> <a href="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}" rel="zoom-id: Zoom" rev="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}"><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}"></a> </li>
+              		<!--{/foreach}--> 
+              		<!-- {/if}-->
+              </ul>
+        </div>
+  </div>
+
+<script>
+
+	$(".s_tpc a").click(function(){
+		var a = $(this).attr("href");
+		$("#show_big_img").attr("href",a);
+	})
+
+</script>

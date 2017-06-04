@@ -1,0 +1,43 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="index_tit">
+	<h3>热卖单品</h3>
+</div>
+<div class="hot_info f_l">
+	<div class="hot_goods_left f_l">
+    	{insert name='ads' id=19 num=1}
+        <p>[春天的便装]</p>
+        <p>流行色+舒适版型=本色体现</p>
+    </div>
+    <div class="hot_goods_center f_l">
+    	<div class="hot_goods hot_goods_1 f_l">
+        	{insert name='ads' id=20 num=1}
+        	<p>[百搭格子衫]</p>
+        	<p>经典burberry卡其色 舒适纯棉</p>
+            <div class="mb10"></div>
+        </div>
+        <div class="hot_goods hot_goods_2 f_l">
+        	{insert name='ads' id=21 num=1}
+        	<p>[时尚优雅 舒适百搭]</p>
+        	<p>精致细腻的翻绒牛皮拼接设计</p>
+            <div class="mb10"></div>
+        </div>
+        <div class="clear" style=" clear:both"></div>
+        <div class="hot_goods hot_goods_3 f_l">
+        	{insert name='ads' id=22 num=1}
+        	<p>[Bally经典风格 舒适透气]</p>
+        	<p>超柔软头层牛皮休闲鞋</p>
+            <div class="mb10"></div>
+        </div>
+        <div class="hot_goods hot_goods_4 f_l">
+        	{insert name='ads' id=23 num=1}
+        	<p>[柔滑冰爽丝光棉 舒适透气垂感佳]</p>
+        	<p>活性环保印染黄蓝小格长T</p>
+            <div class="mb10"></div>
+        </div>
+    </div>
+    <div class="hot_goods_left f_l">
+    	{insert name='ads' id=24 num=1}
+        <p>[吸湿透气柔软舒适]</p>
+        <p>活性环保个性印花圆领短T</p>
+    </div>
+</div>

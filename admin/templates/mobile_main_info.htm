@@ -1,0 +1,66 @@
+<!-- $Id: brand_info.htm 14216 2008-03-10 02:27:21Z testyang $ -->
+{include file="pageheader.htm"}
+<div class="main-div">
+<form method="post" action="mobile_main.php?act=update" enctype="multipart/form-data" >
+<table cellspacing="1" cellpadding="3" width="100%">
+  <tr>
+    <td class="label">分类名称</td>
+    <td><input type="text" name="admin_name" maxlength="60" value="{$brand.admin_name}" disabled/>{$lang.require_field}</td>
+  </tr>
+  <tr>
+    <td class="label">首页显示的图片（务必保持这几个分类上传的图片相同的长宽）</td>
+    <td>
+      <input type="file" name="goods_img" id="logo" size="45">
+    </td>
+  </tr>
+  <tr>
+    <td class="label">要显示商品的编号</td>
+    <td><input type="text" name="goods_id"  id="goods_id" maxlength="40" size="15" value="{$brand.goods_id}" />查看商品列表页面下的第一竖栏编号(务必填写正确)</td>
+  </tr>
+  <tr>
+    <td class="label">商品的名称</td>
+    <td><input type="text" name="goods_name" id="goods_name" maxlength="40" size="15" value="{$brand.goods_name}" /></td>
+  </tr>
+  <tr>
+    <td class="label">商品的价格</td>
+    <td><input type="text" name="shop_price" id="shop_price" maxlength="40" size="15" value="{$brand.shop_price}" /></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><br />
+      <input type="submit" class="button" value="{$lang.button_submit}" onclick="return check();"/>
+      <input type="hidden" name="id" value="{$brand.id}"/>
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+{literal}
+<script language="JavaScript">
+
+function check(){
+  var shop_price = document.getElementById("shop_price").value;  
+  var goods_name = document.getElementById("goods_name").value;  
+  var goods_id = document.getElementById("goods_id").value;  
+  
+  if(goods_id == ''){
+    alert('请填写商品编号！');
+    return false;
+  }
+  if(isNaN(goods_id)){
+    alert('商品编号为数字！');
+    return false;
+  }
+  if(goods_name == ''){
+    alert('请填写商品名称！');
+    return false;
+  }
+  if(shop_price == ''){
+    alert('请填写商品价格！');
+    return false;
+  }
+  return true;
+}
+
+</script>
+{/literal}
+{include file="pagefooter.htm"}

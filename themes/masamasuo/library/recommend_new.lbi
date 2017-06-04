@@ -1,0 +1,29 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $new_goods} -->
+<div class="index_tit">
+	<a href="./search.php?intro=new" class="red f_r">点击查看更多></a>
+    <h3 class="f_l">新品</h3>
+</div>
+<div class="new_exper_info">
+	<ul>
+    	<!--{foreach from=$new_goods item=goods}-->
+        <li>
+        	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+            <div class="exper_text">
+            	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a>
+                <div class="info_money">
+                	<span class="f_r">原价：{$goods.market_price}</span>
+                    <p class="money">
+                    	<!-- {if $goods.promote_price neq ""} --> 
+        				{$goods.promote_price} 
+        				<!-- {else}--> 
+        				{$goods.shop_price} 
+        				<!--{/if}--> 
+        			</p>
+                </div>
+            </div>
+        </li>
+        <!--{/foreach}--> 
+    </ul>
+</div>
+<!-- {/if} -->

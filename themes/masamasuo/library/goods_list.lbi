@@ -1,0 +1,65 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+<!-- {if $category > 0} -->
+<form name="compareForm" action="compare.php" method="post" onSubmit="return compareGoods(this);">
+  <!-- {/if} --> 
+  
+  <ul>
+  	<!--{foreach from=$goods_list item=goods name=goods_list}-->
+    <!--{if $goods}-->
+  	<li>
+    	<div class="in_masa_up"><a href="{$goods.url}" class="in_pic"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name}"  class="lazyload_bk" height="320"/></a></div>
+        <div class="in_masa_info">
+        	<a class="gray" href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name}</a>
+            <p class="c_9">已有{$goods.comments_number}人评论此商品 </p>
+            <div class="in_price">
+            	<div class="f_r"><!-- {if $show_marketprice} --> 
+          原价：{$goods.market_price}
+          <!-- {/if} -->  | {$goods.zhekou}折</div>
+                <em>
+                	<!--{if $goods.promote_price neq "" } --> 
+          			<font class="">{$goods.promote_price}</font> 
+          			<!--{else}--> 
+          			<font class="">{$goods.shop_price}</font> 
+          			<!--{/if}--> 
+          		</em>
+            </div>
+        </div>
+    </li>
+    <!--{/if}-->
+    <!--{/foreach}-->
+  </ul>
+  <!-- {if $category > 0} -->
+</form>
+<!-- {/if} -->
+
+<div class="blank5"></div>
+<script type="Text/Javascript" language="JavaScript">
+<!--
+{literal}
+function selectPage(sel)
+{
+  sel.form.submit();
+}
+{/literal}
+//-->
+</script> 
+<script type="text/javascript">
+window.onload = function()
+{
+  Compare.init();
+  fixpng();
+}
+{foreach from=$lang.compare_js item=item key=key}
+{if $key neq 'button_compare'}
+var {$key} = "{$item}";
+{else}
+var button_compare = '';
+{/if}
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>

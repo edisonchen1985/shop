@@ -1,0 +1,28 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$gallery.goods_name} - {$shop_name}</title>
+<link rel="shortcut icon" href="favicon.ico" >
+<link rel="icon" href="animated_favicon.gif" type="image/gif" >
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<style>
+body{margin:0;}
+</style>
+<script type="text/javascript">
+{foreach from=$lang.gallery_js item=lang_js key=key}
+var {$key} = '{$lang_js}';
+{/foreach}
+</script>
+{insert_scripts files='jquery-1.9.1.min.js'}
+</head>
+<body>
+<center>
+<img src="{$img_url}" height="98%"/>
+</center>
+<script>
+$(function(){
+	
+})
+</script>
+</body>
+</html>

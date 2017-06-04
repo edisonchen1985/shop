@@ -1,0 +1,59 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+<div <div id="footer_box" style="margin-top:12px">
+    <p style="text-align:center; margin-top:15px; color:#999;">
+    	<!-- ICP 证书{if $icp_number} --> 
+    	{$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+    	<!-- 结束ICP 证书{/if} --> 
+    	{insert name='query_info'}<br />
+    	{foreach from=$lang.p_y item=pv}{$pv}{/foreach}{$licensed}<br />
+    	{if $stats_code}
+    	<div align="left">{$stats_code}</div>
+    	{/if}
+    	
+    </p>
+</div>
+
+<div id="topcontrol" class="get_buy">
+	<div class="get_buy_go">
+    	<a class="shop_get" href="javascript:;" title="购物车">{insert name='cart_info_number'}</a>
+        <a class="new_get" href="./search.php?intro=new" title="新装发布"></a>
+        <a id="kefu" class="serv_get" href="http://wpa.qq.com/msgrd?V=1&Uin=64321&Site=ECSHOP&Menu=yes"></a>
+        <a id="sider_returntop" href="javascript:void(0);" class="top_get" style="display: block;"></a>
+    </div>
+</div>
+<script>
+$(function(){
+	isIe6 = false;
+	
+	if ('undefined' == typeof(document.body.style.maxHeight)) {
+		isIe6 = true;
+	}
+
+	var offset = $("#topcontrol").offset();		
+	var bottom = $("#topcontrol").css("bottom");		
+	$(window).scroll(function(){
+		if ($(window).scrollTop() > 500){
+			$("#topcontrol").fadeIn(800);
+			
+			if(isIe6)
+			{			
+				$("#topcontrol").css("position","absolute")	
+				$("#topcontrol").css("bottom",bottom)
+			}
+		}
+		else
+		{
+			$("#topcontrol").fadeOut(500);
+		}
+		
+	});
+	
+	$("#topcontrol #sider_returntop").click(function(){
+		$('body,html').animate({scrollTop:0},0);
+		return false;
+	});
+
+})
+</script>

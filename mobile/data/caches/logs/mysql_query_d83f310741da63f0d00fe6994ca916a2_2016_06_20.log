@@ -1,0 +1,14 @@
+INSERT INTO `xingsom`.`ecs_sessions` (sesskey, expiry, ip, data) VALUES ('9aeb513b46a398f7909ac32f7d13a375', '1466426284', '106.39.222.35', 'a:0:{}')
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1466426284', ip = '106.39.222.35', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='0', email='0', data = 'a:0:{}' WHERE sesskey = '9aeb513b46a398f7909ac32f7d13a375' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1466424484
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '9aeb513b46a398f7909ac32f7d13a375'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1466424484
+

@@ -1,0 +1,98 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="slideTxtBox1">
+  <div class="hd">
+    <div class="title_txt"> <img src="../images/title_txt08.jpg" border="0"> </div>
+    <ul>
+      <li>本周热销排行榜</li>
+      <li>女士护肤榜</li>
+      <li>彩妆香水榜</li>
+      <li>男士护肤榜</li>
+      <li>美体美发榜</li>
+    </ul>
+  </div>
+  <div class="title_body">
+    <div class="bd">
+      <ul>
+        <!-- {foreach name=top_goods from=$top_goods item=goods}-->
+        <li> <img src="../images/top_{$smarty.foreach.top_goods.iteration}.gif" class="iteration" /> 
+          <!-- {if $smarty.foreach.top_goods.iteration<6}-->
+          <div class="topimg"> <a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}"  /></a> </div>
+          <!-- {/if} -->
+          <div class="top_txt"> <b><a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name}</a></b>
+            <p>{$lang.shop_price}<font class="f1">{$goods.price}</font></p>
+            <p>{$goods.goods_number}人已购买</p>
+          </div>
+        </li>
+        <!-- {/foreach} -->
+      </ul>
+      <ul>
+        <div class="top_list">
+          <div class="top_img"> <a href="http://www.miqi.cn/sk_ii/p52458.html" target="_blank" title="SK-II护肤精华露150ml"><img src="http://img2.miqi.cn/static/team/2013/0708/13732648694133.jpg" border="0" width="220" height="220" alt="SK-II护肤精华露150ml"></a>
+            <div class="top_num01"> <img src="http://img2.miqi.cn/static/theme/pinke/css/mall_new/images/top_num.png" border="0" alt="SK-II护肤精华露150ml"> </div>
+          </div>
+          <div class="top_txt"> <b><a href="http://www.miqi.cn/sk_ii/p52458.html" target="_blank" title="SK-II护肤精华露150ml">SK-II护肤精华露150ml</a></b>
+            <p>保湿,活肤,紧肤除皱,抗衰老</p>
+            <p>25人购买</p>
+          </div>
+        </div>
+        <div class="top_list">
+          <div class="top_img"> <a href="http://www.miqi.cn/elizabeth_arden/p4030.html" target="_blank" title="雅顿显效复合活肤霜75ml"><img src="http://img2.miqi.cn/static/team/2012/0613/13395574167297.jpg" border="0" width="220" height="220" alt="雅顿显效复合活肤霜75ml"></a>
+            <div class="top_num02">
+              <p>2</p>
+            </div>
+          </div>
+          <div class="top_txt"> <b><a href="http://www.miqi.cn/elizabeth_arden/p4030.html" target="_blank" title="雅顿显效复合活肤霜75ml">雅顿显效复合活肤霜75ml</a></b>
+            <p>保湿,去细纹</p>
+            <p>1368人购买</p>
+          </div>
+        </div>
+        <div class="top_list">
+          <div class="top_img"> <a href="http://www.miqi.cn/jurlique/p7756.html" target="_blank" title="茱莉蔻玫瑰衡肌花卉水100ml"><img src="http://img2.miqi.cn/static/team/2013/0701/13726644262400.jpg" border="0" width="220" height="220" alt="茱莉蔻玫瑰衡肌花卉水100ml"></a>
+            <div class="top_num02">
+              <p>3</p>
+            </div>
+          </div>
+          <div class="top_txt"> <b><a href="http://www.miqi.cn/jurlique/p7756.html" target="_blank" title="茱莉蔻玫瑰衡肌花卉水100ml">茱莉蔻玫瑰衡肌花卉水100ml</a></b>
+            <p>保湿,补水,修护</p>
+            <p>501人购买</p>
+          </div>
+        </div>
+        <div class="top_list">
+          <div class="top_img"> <a href="http://www.miqi.cn/biotherm/p3759.html" target="_blank" title="碧欧泉活泉爽肤洁面乳150ml"><img src="http://img2.miqi.cn/static/team/2012/0628/13408792434280.jpg" border="0" width="220" height="220" alt="碧欧泉活泉爽肤洁面乳150ml"></a>
+            <div class="top_num02">
+              <p>4</p>
+            </div>
+          </div>
+          <div class="top_txt"> <b><a href="http://www.miqi.cn/biotherm/p3759.html" target="_blank" title="碧欧泉活泉爽肤洁面乳150ml">碧欧泉活泉爽肤洁面乳150ml</a></b>
+            <p>清洁</p>
+            <p>1254人购买</p>
+          </div>
+        </div>
+        <div class="top_list">
+          <div class="top_img"> <a href="http://www.miqi.cn/beautydiary/p7309.html" target="_blank" title="我的美丽日记纳豆面膜10片"><img src="http://img2.miqi.cn/static/team/2012/0621/13402612177816.jpg" border="0" width="220" height="220" alt="我的美丽日记纳豆面膜10片"></a>
+            <div class="top_num02">
+              <p>5</p>
+            </div>
+          </div>
+          <div class="top_txt"> <b><a href="http://www.miqi.cn/beautydiary/p7309.html" target="_blank" title="我的美丽日记纳豆面膜10片">我的美丽日记纳豆面膜10片</a></b>
+            <p>保湿,补水,抗衰老</p>
+            <p>1052人购买</p>
+          </div>
+        </div>
+      </ul>
+      <ul>
+       3
+      </ul>
+       <ul>
+       4
+      </ul>
+      <ul>
+      5
+      </ul>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+		jQuery(".slideTxtBox1").slide({trigger:"click"});
+		</script>
+<div class="blank5"></div>

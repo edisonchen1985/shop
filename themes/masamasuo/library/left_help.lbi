@@ -1,0 +1,20 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $helps}-->
+<div class="leftbox">
+	<h2 class="help_title">
+		<p class="title">帮助中心</p>
+		<p class="title_line tline_01"></p>
+	</h2>
+    <div class="bg_drawing help_nav gray">
+    	<dl class="sub_help">
+        	<!-- {foreach from=$helps item=help_cat} -->
+            <dt><a  href='{$help_cat.cat_id}' title="{$help_cat.cat_name}">{$help_cat.cat_name}</a></dt>
+            <!-- {foreach from=$help_cat.article item=item} -->
+            <dd><a {if $id eq $item.article_id} class="sell" {/if} href="{$item.url}" title="{$item.title|escape:html}"> {$item.short_title}</a></dd>
+            <!-- {/foreach} -->
+            <!-- {/foreach} -->
+        </dl>
+    </div>
+    <p class="clear"></p>
+</div>
+<!--{/if}-->

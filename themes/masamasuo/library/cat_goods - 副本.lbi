@@ -1,0 +1,51 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="goods_body">
+	<div class="index_tit2" style="padding-bottom:10px">
+		<a class="f_r red" target="_blank" href="{$goods_cat.url}">点击查看更多></a>
+		<h3 class="msbt_2014">{$goods_cat.name}</h3>
+	</div>
+    <div class="pants_info">
+    	{insert name='get_ad' cat_name=$goods_cat.name type='大广告'} 
+    </div>
+    <div class="testtab" style="position: relative; height: 352px; overflow: hidden;">
+    	<div class="pants_nav tabtag hd" style="position:relative;">
+        	<ul>
+            	<!--{foreach from=$goods_cat.goods_level3 item=goods_level3 name=foo}-->
+                <!-- {if $smarty.foreach.foo.iteration<3}--> 
+  				<li <!--{if $smarty.foreach.foo.iteration eq 1}-->class="on"<!--{/if}-->><a href="{$goods_level3.url}">{$goods_level3.cat_name}</a></li>
+                <!-- {/if} -->
+  				<!--{/foreach}-->   
+            </ul>
+        </div>
+        
+        <div class="tabcon bd">
+        	<!--{foreach from=$goods_cat.goods_level3 item=goods_level3 name=fol}-->
+            <!-- {if $smarty.foreach.fol.iteration<3}--> 
+        	<div class="tibla ">
+            	<ul>
+            	   <!-- {foreach from=$goods_level3.goods item=goods name=foo} -->
+                		<li>
+                        		<a href="{$goods.url}"><img src="{$goods.goods_thumb}" alt="{$goods.goods_name|escape:html}" width="170" height="227" /></a>
+                               <div class="exper_text">
+                                   <a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.goods_name|escape:html}</a>
+                                   <div class="info_money">
+                                       <span class="f_r">原价：{$goods.shop_price}</span>
+                                       <p class="money">{$goods.market_price}</p>
+                                   </div>	
+                               </div>
+                        	
+                    	</li>
+                	<!--{/foreach}-->
+             	</ul>
+            </div>
+            <!-- {/if} -->
+            <!--{/foreach}-->
+        </div>
+        
+    </div>
+</div>
+<script type="text/javascript">
+jQuery(".testtab").slide({effect:"left"});
+</script>
+

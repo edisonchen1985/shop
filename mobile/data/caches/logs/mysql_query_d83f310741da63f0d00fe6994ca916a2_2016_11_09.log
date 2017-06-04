@@ -1,0 +1,586 @@
+INSERT INTO `xingsom`.`ecs_sessions` (sesskey, expiry, ip, data) VALUES ('667e0cbb3c602c4706b322373ca51227', '1478694365', '60.253.168.66', 'a:0:{}')
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694365', ip = '60.253.168.66', userid = '0', adminid = '0', user_name='0', user_rank='0', discount='0', email='0', data = 'a:0:{}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT `ec_salt` FROM `xingsom`.`ecs_admin_user`WHERE user_name = 'root'
+
+SELECT user_id, user_name, password, last_login, action_list, last_login,suppliers_id,ec_salt FROM `xingsom`.`ecs_admin_user` WHERE user_name = 'root' AND password = '4f02db9ca5c48ab7bfbff1e8d79fecda'
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692570
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT `ec_salt` FROM `xingsom`.`ecs_admin_user`WHERE user_name = 'admin'
+
+SELECT user_id, user_name, password, last_login, action_list, last_login,suppliers_id,ec_salt FROM `xingsom`.`ecs_admin_user` WHERE user_name = 'admin' AND password = 'a43aadd7bf250b41d59d02f310f30589'
+
+UPDATE `xingsom`.`ecs_admin_user` SET last_login='1478665579', last_ip='60.253.168.66' WHERE user_id='1'
+
+SELECT DISTINCT session_id FROM `xingsom`.`ecs_cart` AS c, `xingsom`.`ecs_sessions` AS s WHERE c.session_id = s.sesskey 
+
+DELETE FROM `xingsom`.`ecs_cart` WHERE session_id NOT  IN ('') 
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694379', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:4:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";s:10:\"1478543862\";s:12:\"suppliers_id\";s:1:\"0\";}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478692579
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT message_id, sender_id, receiver_id, sent_time, readed, deleted, title, message, user_name FROM `xingsom`.`ecs_admin_message` AS a, `xingsom`.`ecs_admin_user` AS b WHERE a.sender_id = b.user_id AND a.receiver_id = '1' AND a.readed = 0 AND deleted = 0 ORDER BY a.sent_time DESC
+
+SELECT pay_id, is_cod FROM `xingsom`.`ecs_payment` WHERE enabled = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE 1  AND order_status  IN ('1','5')  AND shipping_status  IN ('1','2')  AND pay_status  IN ('2','1')  
+
+SELECT pay_id FROM `xingsom`.`ecs_payment` WHERE is_cod = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE 1  AND   order_status  IN ('1','5','6')  AND   shipping_status  IN ('0','3','5')  AND ( pay_status  IN ('2','1')  OR pay_id  IN ('3') ) 
+
+SELECT pay_id FROM `xingsom`.`ecs_payment` WHERE is_cod = 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE 1  AND   order_status  IN ('1','5')  AND   pay_status = '0' AND ( shipping_status  IN ('1','2')  OR pay_id  IN ('1','2','4') ) 
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE 1  AND order_status = '0' 
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE  shipping_status=4
+
+SELECT COUNT(*) AS oCount, IFNULL(SUM(order_amount), 0) AS oAmount FROM `xingsom`.`ecs_order_info`
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_alone_sale = 1 AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_alone_sale = 1 AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_new = 1 AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_new = 1 AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_best = 1 AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_best = 1 AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_hot = 1 AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_hot = 1 AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND promote_price>0 AND promote_start_date <= '1478665579' AND promote_end_date >= '1478665579' AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND promote_price>0 AND promote_start_date <= '1478665579' AND promote_end_date >= '1478665579' AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND goods_number <= warn_number AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND goods_number <= warn_number AND is_real=0 AND extension_code='virtual_card'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_stats` WHERE access_time > 1478592000
+
+SELECT count(*) FROM `xingsom`.`ecs_sessions`
+
+SELECT COUNT(f.msg_id) FROM `xingsom`.`ecs_feedback` AS f LEFT JOIN `xingsom`.`ecs_feedback` AS r ON r.parent_id=f.msg_id WHERE f.parent_id=0 AND ISNULL(r.msg_id) 
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_comment` WHERE status = 0 AND parent_id = 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_booking_goods` WHERE is_dispose = 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_user_account` WHERE process_type = 1 AND is_paid = 0 
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) AS oCount, IFNULL(SUM(order_amount), 0) AS oAmount FROM `xingsom`.`ecs_order_info`
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_goods` WHERE is_delete = 0 AND is_alone_sale = 1 AND is_real = 1
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_users`
+
+SELECT value FROM `xingsom`.`ecs_shop_config` WHERE code = 'template'
+
+SELECT value FROM `xingsom`.`ecs_shop_config` WHERE code = 'stylename'
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692580
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692668
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478543862'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478543862
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694468', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692668
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE pay_code = 'alipay' AND enabled = '1'
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694479', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694491', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478692691
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_payment`SET enabled = '0' WHERE pay_code = 'cod' LIMIT 1
+
+INSERT INTO `xingsom`.`ecs_admin_log` (log_time, user_id, log_info, ip_address)  VALUES ('1478665717', 1, '卸载支付方式: cod', '60.253.168.66')
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694517', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478692719
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_payment`SET enabled = '0' WHERE pay_code = 'bank' LIMIT 1
+
+INSERT INTO `xingsom`.`ecs_admin_log` (log_time, user_id, log_info, ip_address)  VALUES ('1478665730', 1, '卸载支付方式: bank', '60.253.168.66')
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694530', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478692730
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692730
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_payment`SET enabled = '0' WHERE pay_code = 'balance' LIMIT 1
+
+INSERT INTO `xingsom`.`ecs_admin_log` (log_time, user_id, log_info, ip_address)  VALUES ('1478665740', 1, '卸载支付方式: balance', '60.253.168.66')
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694540', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692740
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692742
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694618', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478665668;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478692818
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478665668'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478665668
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694804', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666004;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478693004
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693004
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478666004'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478666004
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478694984', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666184;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478693184
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693184
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478666184'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478666184
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695164', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666364;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478693364
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693364
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695264', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666364;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478693464
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693464
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_payment` WHERE pay_name = '微信支付' AND pay_code <> 'wxpay'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_payment` WHERE pay_code = 'wxpay'
+
+INSERT INTO `xingsom`.`ecs_payment` (pay_code, pay_name, pay_desc, pay_config, is_cod, pay_fee, enabled, is_online)VALUES ('wxpay', '微信支付', '微信支付，是基于微信公众号JS_API网页支付提供的支付服务功能。', 'a:4:{i:0;a:3:{s:4:"name";s:11:"wxpay_appid";s:4:"type";s:4:"text";s:5:"value";s:0:"";}i:1;a:3:{s:4:"name";s:15:"wxpay_appsecret";s:4:"type";s:4:"text";s:5:"value";s:0:"";}i:2;a:3:{s:4:"name";s:9:"wxpay_key";s:4:"type";s:4:"text";s:5:"value";s:0:"";}i:3;a:3:{s:4:"name";s:11:"wxpay_mchid";s:4:"type";s:4:"text";s:5:"value";s:0:"";}}', '0', '0', 1, '1')
+
+INSERT INTO `xingsom`.`ecs_admin_log` (log_time, user_id, log_info, ip_address)  VALUES ('1478666471', 1, '安装支付方式: 微信支付', '60.253.168.66')
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695276', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666364;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693476
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE pay_code = 'wxpay' AND enabled = '1'
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693482
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+UPDATE `xingsom`.`ecs_payment`SET enabled = '0' WHERE pay_code = 'wxpay' LIMIT 1
+
+INSERT INTO `xingsom`.`ecs_admin_log` (log_time, user_id, log_info, ip_address)  VALUES ('1478666508', 1, '卸载支付方式: wxpay', '60.253.168.66')
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695308', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666364;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693508
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT * FROM `xingsom`.`ecs_payment` WHERE enabled = '1' ORDER BY pay_order
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478693512
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478666364'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478666364
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695493', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666693;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478666693'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478666693
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695673', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478666873;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478693873
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478666873'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478666873
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478695853', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667053;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667053'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667053
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696033', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667233;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667233'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667233
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696213', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667413;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667413'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667413
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696394', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667594;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478694594
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478694594
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = 'eca4bad6e91022a25097087ac7d05099'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478694773
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = 'eca4bad6e91022a25097087ac7d05099'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667594'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667594
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696575', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667775;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478694775
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '6cfceba738fb913dae3f5d14236524ee'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478694778
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478694778
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '6cfceba738fb913dae3f5d14236524ee'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478694778
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667775'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667775
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696755', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478667955;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478694955
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478667955'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478667955
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478696935', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478668135;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478668135'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478668135
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478697116', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478668316;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478695316
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478668316'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478668316
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478697297', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478668497;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478695497
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478668497'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478668497
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478697478', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478668678;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478695678
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478695678
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478668678'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478668678
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478697658', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478668858;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478695858
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478668858'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478668858
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478697839', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669039;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669039'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669039
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698019', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669219;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669219'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669219
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698199', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669399;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478696399
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669399'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669399
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698380', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669580;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478696580
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669580'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669580
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698560', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669760;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478696760
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669760'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669760
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698740', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478669940;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions_data` WHERE expiry < 1478696940
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478696940
+
+SELECT userid, adminid, user_name, user_rank, discount, email, data, expiry FROM `xingsom`.`ecs_sessions` WHERE sesskey = '667e0cbb3c602c4706b322373ca51227'
+
+SELECT code, value FROM `xingsom`.`ecs_shop_config` WHERE parent_id > 0
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE add_time >= '1478669940'
+
+SELECT COUNT(*) FROM `xingsom`.`ecs_order_info` WHERE pay_time >= 1478669940
+
+UPDATE `xingsom`.`ecs_sessions` SET expiry = '1478698920', ip = '60.253.168.66', userid = '0', adminid = '1', user_name='0', user_rank='0', discount='0', email='0', data = 'a:5:{s:10:\"admin_name\";s:5:\"admin\";s:11:\"action_list\";s:3:\"all\";s:10:\"last_check\";i:1478670120;s:12:\"suppliers_id\";s:1:\"0\";s:9:\"wechat_id\";i:1;}' WHERE sesskey = '667e0cbb3c602c4706b322373ca51227' LIMIT 1
+
+DELETE FROM `xingsom`.`ecs_sessions` WHERE expiry < 1478697120
+

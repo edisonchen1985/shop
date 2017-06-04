@@ -1,0 +1,60 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<div class="footer">
+	<div class="footer_logo">
+    	<img src="images/footer_link_3.jpg" border="0" /> 
+    </div>
+    <div class="footer_box">
+    	<div class="footer_promise">
+        	<img src="images/footer_m_6.jpg" border="0" />
+        </div>
+    </div>
+    <!--{if $helps}-->
+    <div class="help_link_list">
+    	<!-- {foreach from=$helps item=help_cat name=no} -->
+    	<ul class="help_link">
+        	<p>
+            	{$help_cat.cat_name}
+            </p>
+            <!-- {foreach from=$help_cat.article item=item} -->
+    		<li><a href="{$item.url}" title="{$item.title|escape:html}">{$item.short_title}</a></li>
+    		<!-- {/foreach} -->
+        </ul>
+        <!-- {/foreach} --> 
+    </div>
+    <!--{/if}-->
+</div>
+<div class="footer_nav_box">
+	<div class="footer_nav">
+    	<!-- {if $navigator_list.bottom} -->
+    	<ul style="width:1018px; margin:0 auto;">
+        	<li>
+            	<!-- {foreach name=nav_bottom_list from=$navigator_list.bottom item=nav} --> 
+      			<a href="{$nav.url}">{$nav.name}</a> 
+      			<!-- {if !$smarty.foreach.nav_bottom_list.last} --> 
+      				<span> | </span>
+      			<!-- {/if} --> 
+      			<!-- {/foreach} -->
+            </li>
+            <li class="integrity">
+            	<span> | </span>
+				<a href="#">
+					<img width="83" height="22" src="images/integrity_logo.gif">
+				</a>
+			</li>
+        </ul>
+        <!--{/if}-->
+    </div>
+    <p style="text-align:center; margin-top:15px; color:#999;">
+    	<!-- ICP 证书{if $icp_number} --> 
+    	{$lang.icp_number}:<a href="http://www.miibeian.gov.cn/" target="_blank">{$icp_number}</a><br />
+    	<!-- 结束ICP 证书{/if} --> 
+    	{insert name='query_info'}<br />
+    	{foreach from=$lang.p_y item=pv}{$pv}{/foreach}{$licensed}<br />
+    	{if $stats_code}
+    	<div align="left">{$stats_code}</div>
+    	{/if}
+    	
+    </p>
+</div>
+

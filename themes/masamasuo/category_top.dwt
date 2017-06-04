@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.9.1.min.js,jquery.json.js'}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+<div class="menu_box_navbg"></div>
+<!-- #BeginLibraryItem "/library/category_tree_index.lbi" --> <!-- #EndLibraryItem -->
+
+<div class="wrap_bg">
+	<!-- #BeginLibraryItem "/library/index_ad_top.lbi" --><!-- #EndLibraryItem -->
+    <div class="clearfix cl"></div>
+    <div class="" style="position:relative; z-index:99">
+    	<div id="btns_bar" class="menu_2_nav_bg btns_bar" style="position: relative; top: 0px; left: 0px;">
+        	<div class="menu_2_nav btns_con">
+            	<ul>
+                	<!--{foreach from=$categories_child item=cat name=cat}--> 
+      				{if $cat.cat_id}
+        				<li> 
+          					<a href="#flow_{$smarty.foreach.cat.iteration}">{$cat.name|escape:html}</a>
+        				</li>
+      				{/if} 
+      				<!--{/foreach}--> 
+                </ul>
+            </div>
+        </div>
+        <script>
+        
+        
+			$(function(){	
+				/*快捷菜单宽度自适应*/
+				function win_ch(){
+					if($('#btns_bar').css('position') ==='absolute'){
+					var bar_l = $('.goods_box').offset().left;
+					$('#btns_bar').css({'left':-bar_l,'width':$(window).width()});
+					bar_left  = $('#btns_bar').css('left');}
+				}
+				
+				//快捷菜单滚动后在顶部
+				function show_bar(barTop) {
+					var scrollTop = $(window).scrollTop();
+					if(window.XMLHttpRequest)
+					{
+						if(scrollTop >= barTop)
+						{
+							$('#btns_bar').css({position: 'fixed', top: 0,left:0});
+						}
+						else {
+							$('#btns_bar').css({position: 'relative', top: 0 });
+						}
+					}
+					else {
+						if(scrollTop >= barTop)
+						{	$('#btns_bar').css({top: scrollTop - barTop,position: 'absolute'});
+							win_ch();
+							$(window).resize(function(){
+								win_ch();
+							})
+							
+						}
+						else {
+							$('#btns_bar').css({top:0, 'left':0, position: 'relative','width':'auto'});
+						}
+					}
+				}
+				
+				barTop = $('#btns_bar').offset().top;
+				$(window).bind("scroll", function(){
+					show_bar(barTop);
+				});
+			});        
+        </script>
+    </div>
+    <div class="wrap_1200">
+    	<!-- {foreach from=$categories_child_goods item=cat_goods name=no} -->
+    	<div class="mayaluo">
+        	<a href="{$cat_goods.url}" class="red f_r" >更多</a>
+        	<h3 class="index_tit_lin" id="flow_{$smarty.foreach.no.iteration}">{$cat_goods.name}</h3>
+        </div>
+        
+        
+        <div class="in_masa">
+        	<ul>
+            	<!--{foreach from=$cat_goods.goods item=child_goods}-->
+            	<li>
+                	<div class="in_masa_up">
+                    	<a class="in_pic" target="_blank" href="{$child_goods.url}" title="{$child_goods.short_name}"><img src="{$child_goods.thumb}"/></a>
+                    </div>
+                    <div class="in_masa_info">
+                    	<a href="{$child_goods.url}" title="{$child_goods.short_name}"  class="gray">{$child_goods.name}</a>
+                        <p class="c_9">{$goods.review_count}</p>
+                        <div class="in_price">
+                        	<div class="f_r">{$child_goods.market_price} | {$child_goods.zhekou} 折</div>
+                            <em>{$child_goods.shop_price}</em>
+                        </div>
+                    </div>
+                </li>
+                <!-- {/foreach} -->
+            </ul>
+        </div>
+        
+        <!-- {/foreach} -->
+    </div>	
+</div>
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+</body>
+</html>

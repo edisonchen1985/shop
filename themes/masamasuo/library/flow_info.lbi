@@ -1,0 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<p style="text-align: left">
+商品原价：<span>{$market_price}</span>
+</p>
+<p style="text-align: left">
+优惠金额：<em>{$saving}</em>
+</p>

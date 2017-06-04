@@ -1,0 +1,31 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- {if $bought_goods} -->
+<div class="sp_r_shadow">
+	<div class="mayaluo">
+		<h3 class="index_tit_lin" style="font-weight:400">买过这件商品的人还买过</h3>
+	</div>
+    <div class="in_masa">
+    	<ul>
+        	<!--{foreach from=$bought_goods item=bought_goods_data name=no}-->
+            <!-- {if $smarty.foreach.no.iteration<6}--> 
+            <li>
+            	<div class="in_masa_up">
+                	<a href="{$bought_goods_data.url}"><img src="{$bought_goods_data.goods_thumb}" alt="{$bought_goods_data.goods_name}"  /></a>
+                </div>
+                <div class="in_masa_info">
+                	<a href="{$bought_goods_data.url}" title="{$bought_goods_data.goods_name}" class="gray">{$bought_goods_data.short_name}</a>
+                    <div class="in_price">
+                    	<!-- {if $bought_goods_data.promote_price neq 0} -->
+                        <em>{$bought_goods_data.formated_promote_price}</em>
+                        <!-- {else} -->
+                        <em>{$bought_goods_data.shop_price}</em>
+                        <!-- {/if} -->
+                    </div>
+                </div>
+            </li>
+            <!-- {/if} -->
+            <!-- {/foreach} -->	
+        </ul>
+    </div>
+</div>
+<!-- {/if} -->

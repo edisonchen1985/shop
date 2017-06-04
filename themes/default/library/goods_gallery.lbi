@@ -1,0 +1,21 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="mod_picfold tabbox clearfix">
+  <div id="detail_main_img" class="imgbox">
+    <div class="layout_wrap">
+      <div class="prodimg"  title="{$goods.goods_name|escape:html}">  <a href="{$pictures.0.img_url}" class="MagicZoomPlus" id="Zoomer" rel="hint-text: ; selectors-effect: false; selectors-class: on; zoom-distance: 22;zoom-width: 478; zoom-height: 478;" onclick="window.open('gallery.php?id={$goods.goods_id}'); return false;"><img id="J_prodImg" width="478" height="478" src="{$goods.goods_img}" alt="{$goods.goods_name|escape:html}" /></a></div>
+      <div class="tabbox clearfix">
+        <div id="detail_img_slider" class="imgtab">
+          <div class="imgtab_clip" id="J_tabSlider">
+            <ul class="imgtab_con">
+              <!-- {if $pictures}--> 
+              <!-- {foreach from=$pictures item=picture}-->
+              <li> <a href="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}" rel="zoom-id: Zoomer" rev="{if $picture.img_url}{$picture.img_url}{else}{$picture.thumb_url}{/if}"><img src="{if $picture.thumb_url}{$picture.thumb_url}{else}{$picture.img_url}{/if}" alt="{$goods.goods_name}"></a> </li>
+              <!--{/foreach}--> 
+              <!-- {/if}-->
+            </ul>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

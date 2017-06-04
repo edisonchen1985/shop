@@ -1,0 +1,1217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,index.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="menu_box_navbg"></div>
+
+<!-- #BeginLibraryItem "/library/category_tree_index.lbi" --> <!-- #EndLibraryItem -->
+
+<div class="wrap_bg">
+
+	<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+    
+    <div class="wrap_1200">
+    
+    	<div class="index_lump">
+        	<div class="lump_right">
+            	<!-- TemplateBeginEditable name="最新公告" -->
+<!-- #BeginLibraryItem "/library/cat_articles.lbi" -->
+
+<div class="new_placard mt10">
+	<h3 class="index_tit_lin">最新公告</h3>
+    <div class="new_plac_info">
+    	<!--{foreach from=$articles item=article_item}-->
+  		· <a href="{$article_item.url}" title="{$article_item.title|escape:html}">{$article_item.short_title}</a><br />
+  		<!--{/foreach}-->
+    </div>
+</div>
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+			<!-- TemplateBeginEditable name="今日团购" -->
+<!-- #BeginLibraryItem "/library/group_buy.lbi" -->
+
+<!-- {if $group_buy_goods} -->
+<div >
+<div class="t_buy">
+	<h3 class="index_tit_lin_red">
+		<a href="group_buy.php">今日团购</a>
+	</h3>
+    
+    <div class="og_prev prev"></div>
+    <div class="og_next next"></div>
+    
+    <div class="bd">
+
+    	<ul>
+        	<!--{foreach from=$group_buy_goods item=goods}-->
+        	<li>
+            	<a href="{$goods.url}" ><img src="{$goods.thumb}" alt="{$goods.goods_name|escape:html}"  width="150" height="200"/></a>
+                <div style=" clear:both"></div>
+                <div class="t_buy_price">
+               		{$goods.last_price}
+            	</div>
+                <a href="{$goods.url}" class="buy_btn"></a>
+            </li>
+            <!--{/foreach}-->
+        </ul>
+
+    </div>
+</div>
+</div>
+<!-- {/if} -->
+
+
+
+
+
+<script type="text/javascript">
+	jQuery(".t_buy").slide({titCell:".hd ul",mainCell:".bd ul",autoPage:true,effect:"left",autoPlay:false,vis:1});
+	
+	$(function(){
+		var datename = new Date();
+		var Offset = datename.getTimezoneOffset() * 28800;
+		
+		setInterval(function(){
+		  $(".endtime").each(function(){
+			var obj = $(this);
+			var endTime = new Date(parseInt(obj.attr('value')) * 1000 - Offset) ;
+			var show_day =  obj.attr('showday');
+			var nowTime = new Date();
+			var nMS=endTime.getTime() - nowTime.getTime();
+			var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+			var myH_show=Math.floor(nMS/(1000*60*60) % 24);
+			var myH=Math.floor(nMS/(1000*60*60));
+			var myM=Math.floor(nMS/(1000*60)) % 60;
+			var myS=Math.floor(nMS/1000) % 60;
+			var myMS=Math.floor(nMS/100) % 10;
+			
+			if(myS>=0){
+				if(show_day == 'show')
+				{
+					var str = '还剩<strong class="tcd-d">'+myD+'</strong>天<strong class="tcd-h">'+myH_show+'</strong>小时<strong class="tcd-m">'+myM+'</strong>分<strong class="tcd-s">'+myS+'</strong>秒';
+				}
+				else
+				{
+					var str = '<span>'+myH+'</span>时<span>'+myM+'</span>分<span>'+myS+'</span>秒';
+				}
+			}else{
+				var str = "已结束！";	
+			}
+			obj.html(str);
+		  });
+		}, 100);
+	})
+	
+</script> 
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+            </div>
+            <div class="hot_odd">
+            <!-- #BeginLibraryItem "/library/hot_sail_goods.lbi" --><!-- #EndLibraryItem -->	
+            </div>
+        </div>
+        
+        <div class="index_lump">
+        	<div class="lump_right">
+            	<div class="mend_topic">
+                	<h3 class="index_tit_lin">专题推荐</h3>
+                    <div class="mend_topic_info">
+                    	<!-- TemplateBeginEditable name="专题推荐1" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="专题推荐2" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </div>
+                </div>
+            </div>
+            <div class="new_exper">
+            	<!-- TemplateBeginEditable name="新品" -->
+<!-- #BeginLibraryItem "/library/recommend_new.lbi" -->
+
+<!-- {if $new_goods} -->
+<div class="index_tit">
+	<a href="./search.php?intro=new" class="red f_r">点击查看更多></a>
+    <h3 class="f_l">新品</h3>
+</div>
+<div class="new_exper_info">
+	<ul>
+    	<!--{foreach from=$new_goods item=goods}-->
+        <li>
+        	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+            <div class="exper_text">
+            	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_style_name}</a>
+                <div class="info_money">
+                	<span class="f_r">原价：{$goods.market_price}</span>
+                    <p class="money">
+                    	<!-- {if $goods.promote_price neq ""} --> 
+        				{$goods.promote_price} 
+        				<!-- {else}--> 
+        				{$goods.shop_price} 
+        				<!--{/if}--> 
+        			</p>
+                </div>
+            </div>
+        </li>
+        <!--{/foreach}--> 
+    </ul>
+</div>
+<!-- {/if} -->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+            </div>
+        </div>
+        
+        <!--首页一楼S-->
+        <div class="index_lump">
+        	<div class="shoes">
+            	<!-- #BeginLibraryItem "/library/tit1.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页一楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div id="testtab139" class="testtab">
+                	<!-- #BeginLibraryItem "/library/change_tit1.lbi" --><!-- #EndLibraryItem -->
+                    <div id="tabcon139" class="tabcon">
+                    	<div class="index_info">
+                    		<ul>
+                        		<!-- TemplateBeginEditable name="首页一楼产品切换一" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        	</ul>
+                            <ul style=" display:none">
+                        		<!-- TemplateBeginEditable name="首页一楼产品切换二" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        	</ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+$(document.body).ready(function(){
+var tab_nav = $('#tabtag139 li');
+var nav_num = tab_nav.length;
+var i = 0;
+function loop_tab(num){
+$('#tabcon139 ul').each(function(index,data){
+if(index == num){
+tab_nav.eq(index).attr('class','cur');
+$(data).css('display','');
+
+}else{
+tab_nav.eq(index).attr('class','');
+$(data).css('display','none');
+}
+})
+};
+var auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+tab_nav.mouseover(function(){
+i = $(this).attr('index');
+loop_tab(i);
+window.clearInterval(auto);
+}).mouseout(function(){
+auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+})
+
+});
+</script>
+            </div>
+        </div>
+        <!--首页一楼E-->
+        
+        <!--首页二楼S-->
+        <div class="index_lump">
+        	<!--首页二楼左边S-->
+        	<div class="sweater">
+            	<!-- #BeginLibraryItem "/library/tit2.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                <!-- TemplateBeginEditable name="首页二楼左边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页二楼左边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+        	<!--首页二楼左边E-->
+            
+            <!--首页二楼右边S-->
+            <div class="t_shirt">
+            	<!-- #BeginLibraryItem "/library/tit3.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页二楼右边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页二楼右边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页二楼右边E-->
+        </div>
+        <!--首页二楼E-->
+        
+        <!--首页三楼S-->
+        <div class="index_lump">
+        	<div class="shoes">
+            	<!-- #BeginLibraryItem "/library/tit4.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页三楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div id="testtab123" class="testtab">
+                	<!-- #BeginLibraryItem "/library/change_tit2.lbi" --><!-- #EndLibraryItem -->
+                    <div id="tabcon123" class="tabcon">
+                    	<div class="index_info">
+                    		<ul>
+                        		<!-- TemplateBeginEditable name="首页三楼产品切换一" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        	</ul>
+                            <ul style=" display:none">
+                        		<!-- TemplateBeginEditable name="首页三楼产品切换二" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        	</ul>
+                        </div>
+                    </div>
+                    <script>
+$(document.body).ready(function(){
+var tab_nav = $('#tabtag123 li');
+var nav_num = tab_nav.length;
+var i = 0;
+function loop_tab(num){
+$('#tabcon123 ul').each(function(index,data){
+if(index == num){
+tab_nav.eq(index).attr('class','cur');
+$(data).css('display','');
+}else{
+tab_nav.eq(index).attr('class','');
+$(data).css('display','none');
+}
+})
+};
+var auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+tab_nav.mouseover(function(){
+i = $(this).attr('index');
+loop_tab(i);
+window.clearInterval(auto);
+}).mouseout(function(){
+auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+})
+
+});
+</script>
+                </div>	
+            </div>
+        </div>
+        <!--首页三楼E-->
+        
+        <!--首页四楼S-->
+        <div class="index_lump">
+        	<!--首页四楼左边S-->
+        	<div class="sweater">
+            	<!-- #BeginLibraryItem "/library/tit5.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页四楼左边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页四楼左边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页四楼左边E-->
+            
+            <!--首页四楼右边S-->
+            <div class="t_shirt">
+            	<!-- #BeginLibraryItem "/library/tit6.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页四楼右边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<!-- TemplateBeginEditable name="首页四楼右边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+            </div>
+            <!--首页四楼右边E-->
+        </div>
+        <!--首页四楼E-->
+        
+        <!--首页五楼S-->
+        <div class="index_lump">
+        	<div class="pants_left">
+            	<!-- #BeginLibraryItem "/library/tit7.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页五楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+            </div>
+            <div class="pants_right">
+            	<div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页五楼产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--首页五楼E-->
+        
+        <!--首页六楼S-->
+        <div class="index_lump">
+        	<div class="shoes">
+            	<!-- #BeginLibraryItem "/library/tit8.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info pants_f">
+      
+                	<!-- TemplateBeginEditable name="首页六楼广告1" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+<!-- TemplateBeginEditable name="首页六楼广告2" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+<!-- TemplateBeginEditable name="首页六楼广告3" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+
+                </div>
+                <div style=" clear:both"></div>
+                <div id="testtab116" class="testtab">
+                	<!-- #BeginLibraryItem "/library/change_tit3.lbi" --><!-- #EndLibraryItem -->
+                    <div id="tabcon116" class="tabcon">
+                     <div class="index_info">
+                    	<ul>
+                        <!-- TemplateBeginEditable name="首页六楼产品切换一" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </ul>
+                        <ul style=" display:none">
+                        <!-- TemplateBeginEditable name="首页六楼产品切换二" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </ul>
+                        <ul style=" display:none">
+                        <!-- TemplateBeginEditable name="首页六楼产品切换三" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </ul>
+                        <ul style=" display:none">
+                        <!-- TemplateBeginEditable name="首页六楼产品切换四" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </ul>
+                        <ul style=" display:none">
+                        <!-- TemplateBeginEditable name="首页六楼产品切换五" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </ul>
+                        </div>
+                    </div>
+                </div>
+                <script>
+$(document.body).ready(function(){
+var tab_nav = $('#tabtag116 li');
+var nav_num = tab_nav.length;
+var i = 0;
+function loop_tab(num){
+$('#tabcon116 ul').each(function(index,data){
+if(index == num){
+tab_nav.eq(index).attr('class','cur');
+$(data).css('display','');
+}else{
+tab_nav.eq(index).attr('class','');
+$(data).css('display','none');
+}
+})
+};
+var auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+tab_nav.mouseover(function(){
+i = $(this).attr('index');
+loop_tab(i);
+window.clearInterval(auto);
+}).mouseout(function(){
+auto = window.setInterval(function(){
+if(nav_num == i){
+i-=nav_num;
+}
+loop_tab(i);
+i++;
+
+}, 2000);
+})
+
+});
+</script>
+            </div>
+        </div>
+        <!--首页六楼E-->
+        
+        <!--首页七楼S-->
+        <div class="index_lump">
+        	<!--首页七楼左边S-->
+            <div class="sweater">
+            	<!-- #BeginLibraryItem "/library/tit9.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页七楼左边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页七楼左边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页七楼左边E-->
+            
+            <!--首页七楼右边S-->
+            <div class="t_shirt">
+            	<!-- #BeginLibraryItem "/library/tit10.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页七楼右边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页七楼右边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页七楼右边E-->
+        </div>
+        <!--首页七楼E-->
+        
+        <!--首页八楼S-->
+        <div class="index_lump">
+        	<!--首页八楼左边S-->
+            <div class="sweater">
+            	<!-- #BeginLibraryItem "/library/tit11.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页八楼左边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页八楼左边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页八楼左边E-->
+            
+            <!--首页八楼右边S-->
+            <div class="t_shirt">
+            	<!-- #BeginLibraryItem "/library/tit12.lbi" --><!-- #EndLibraryItem -->
+                <div class="sweater_info">
+                	<!-- TemplateBeginEditable name="首页八楼右边广告" -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="index_info">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页八楼右边产品区" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+            <!--首页八楼右边E-->
+        </div>
+        <!--首页八楼E-->
+        
+        <!--首页九楼S-->
+        <div class="index_lump">
+        	<div class="pants_left">
+            	<!-- #BeginLibraryItem "/library/tit13.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页九楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+            </div>
+            <div class="pants_right">
+            	<div class="index_info">
+                	<ul>
+                    <!-- TemplateBeginEditable name="首页九楼产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->	
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--首页九楼E-->
+        
+        <!--首页十楼S-->
+        <div class="index_lump">
+        	<div class="pants_left">
+            	<!-- #BeginLibraryItem "/library/tit14.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页十楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+            </div>
+            <div class="pants_right">
+            	<div class="index_info">
+                	<ul>
+                    <!-- TemplateBeginEditable name="首页十楼产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->	
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--首页十楼E-->
+        
+        <!--首页十一楼S-->
+        <div class="index_lump">
+        	<div class="pants_left">
+            	<!-- #BeginLibraryItem "/library/tit15.lbi" --><!-- #EndLibraryItem -->
+                <div class="pants_info">
+                	<!-- TemplateBeginEditable name="首页十一楼广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+            </div>
+            <div class="pants_right">
+            	<div class="index_info">
+                	<ul>
+                    <!-- TemplateBeginEditable name="首页十一楼产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->	
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--首页十一楼E-->
+        
+        <!--首页十二楼S-->
+        <div class="index_lump">
+        	<div class="topics_ded">
+            	<div class="index_tit2" style="padding-bottom:10px">
+					<h3>专题推荐</h3>
+				</div>
+               <!-- TemplateBeginEditable name="首页十二楼左边广告1" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --> 
+<div class="mt20"></div>
+<!-- TemplateBeginEditable name="首页十二楼左边广告2" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --> 
+            </div>
+            <div class="vivian_index">
+            	<!-- #BeginLibraryItem "/library/tit16.lbi" --><!-- #EndLibraryItem -->
+                <div class="vivian_info">
+                	<!-- TemplateBeginEditable name="首页十二楼右边广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                </div>
+                <div class="new_exper_info mt20">
+                	<ul>
+                    	<!-- TemplateBeginEditable name="首页十二楼右边产品区" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" -->
+
+<!--{foreach from=$cat_goods item=goods}-->
+<li>
+	<a href="{$goods.url}"><img src="{$goods.thumb}" alt="{$goods.name|escape:html}" width="170" height="227" /></a>
+    <div class="exper_text">
+    	<a href="{$goods.url}" title="{$goods.name|escape:html}">{$goods.short_name|escape:html}</a>
+        <div class="info_money">
+        	<span class="f_r">
+				原价：{$goods.shop_price}
+			</span>
+            <p class="money">
+            	{$goods.market_price}
+            </p>
+        </div>
+    </div>
+</li>
+<!--{/foreach}-->
+
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--首页十二楼S-->
+        
+        <!--首页底部大广告S-->
+        <div class="foot_add">
+        	<!-- TemplateBeginEditable name="首页底部大广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+        </div>
+        <!--首页底部广告E-->
+        
+    </div>
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+
+<script type="text/javascript">
+
+{foreach from=$lang.compare_js item=item key=key}
+{if $key neq 'button_compare'}
+var {$key} = "{$item}";
+{else}
+var button_compare = '';
+{/if}
+{/foreach}
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!--{if $brands.1 || $price_grade.1 || $filter_attr_list}-->
+<div class="in_menu_left">
+     <ul>
+     	<!--{foreach from=$filter_attr_list item=filter_attr}-->
+        <li><a href="javascript:;">{$filter_attr.filter_attr_name|escape:html}</a></li>
+        <!--{/foreach}-->  
+        <li><a href="javascript:;">{$lang.price}</a></li>     	
+     </ul>
+</div>
+
+<div class="in_selr" style=" display:none">
+	<!--{foreach from=$filter_attr_list item=filter_attr}-->
+	<ul>
+    	
+    	<!--{foreach from=$filter_attr.attr_list item=attr}--> 
+        <!-- {if $attr.selected} -->
+        <li><span>{$attr.attr_value}</span></li>
+        <!-- {else} -->
+        <li><a href="{$attr.url}">{$attr.attr_value}</a> </li>
+        <!-- {/if} --> 
+        <!--{/foreach}-->
+       
+    </ul>
+    <!--{/foreach}-->
+    
+    <!--{if $price_grade.1}-->
+    <ul>
+        <!--{foreach from=$price_grade item=grade}--> 
+        <!-- {if $grade.selected} -->
+        <li><span>{$grade.price_range}</span></li>
+        <!-- {else} -->
+        <li><a href="{$grade.url}">{$grade.price_range}</a></li>
+        <!-- {/if} --> 
+        <!--{/foreach}-->
+     </ul>
+    <!-- {/if} -->
+    
+</div>
+<!-- {/if} -->

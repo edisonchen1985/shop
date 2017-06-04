@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+{* 包含脚本文件 *}
+{insert_scripts files='common.js,lefttime.js'}
+<script type="text/javascript">
+  {foreach from=$lang.js_languages item=item key=key}
+    var {$key} = "{$item}";
+  {/foreach}
+</script>
+<script>
+function changeAtt(t) {
+t.lastChild.checked='checked';
+for (var i = 0; i<t.parentNode.childNodes.length;i++) {
+        if (t.parentNode.childNodes[i].className == 'cattsel') {
+            t.parentNode.childNodes[i].className = '';
+        }
+    }
+t.className = "cattsel";
+changePrice();
+}
+</script>
+
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem --> 
+
+<div class="menu_box_navbg"></div>
+
+<!-- #BeginLibraryItem "/library/category_tree_index.lbi" --> <!-- #EndLibraryItem -->
+
+<div class="wrap_bg">
+<script>
+$(function(){
+	$("#group_box1").slide({mainCell:".group_l ul",titCell:".deal_brief_trigger .trigger",titOnClassName:"current",trigger:"click"});
+
+	var datename = new Date();
+	var Offset = datename.getTimezoneOffset() * 28800;
+		
+	setInterval(function(){
+		$(".end_date").each(function(){
+			var obj = $(this);
+			var endTime = new Date(parseInt(obj.attr('value')) * 1000 - Offset) ;
+			var show_day =  obj.attr('showday');
+			var nowTime = new Date();
+			var nMS=endTime.getTime() - nowTime.getTime();
+			var myD=Math.floor(nMS/(1000 * 60 * 60 * 24));
+			var myH_show=Math.floor(nMS/(1000*60*60) % 24);
+			var myH=Math.floor(nMS/(1000*60*60));
+			var myM=Math.floor(nMS/(1000*60)) % 60;
+			var myS=Math.floor(nMS/1000) % 60;
+			var myMS=Math.floor(nMS/100) % 10;
+			var myHZero = '';
+ 			var myMZero = '';
+			var mySZero = '';
+			if (myH < 10)
+			{
+				var myHZero = '0';
+			}
+			if (myM < 10)
+			{
+				var myMZero = '0';
+			}
+			if (myS < 10)
+			{
+				var mySZero = '0';
+			}
+			if(myH>=0){
+				if(show_day == 'show')
+				{
+					var str = '<span class="times">'+myHZero+myH+'</span><em>时</em><span class="times">'+myMZero+myM+'</span><em>分</em><span class="times">'+mySZero+myS+'</span><em>秒</em>';
+				}
+				else
+				{
+					
+					var str = '<strong class="font_size">'+myD+'</strong>天<strong class="font_size">'+myH_show+'</strong>小时<strong class="font_size">'+myM+'</strong>分';
+				
+				}
+			}else{
+				var str = "已结束！";	
+			}
+			obj.html(str);
+		  });
+	}, 100);
+})
+</script>
+<form action="group_buy.php?act=buy" method="post" name="ECS_FORMBUY" id="ECS_FORMBUY">
+	<div class="wrap1002">
+    	<div class="sp_r_shadow">
+        	<div class="sp_l_shadow">
+            	<div class="gr_wrap">
+                	<div class="gr_main clearfix">
+                    	
+                        	<div class="gr_mian_l">
+                        		<h1>
+                            		<a  href="javascript:void(0);" style=" text-decoration:none; text-align:left" >
+                                		<strong>{$group_buy.goods_name|escape:html}</strong>
+                                		{$group_buy.act_desc}
+                                	</a>
+                            	</h1>
+                                <div class="gr_goods_detal clearfix">
+                                	<div class="gr_goods_detall">
+                                    	<div class="gr_buy2 clearfix gr_buy_now">
+                                        	<span>￥<em>{$group_buy.price_ladder.0.price}</em></span>
+                                         	<input type="hidden" name="group_buy_id" value="{$group_buy.group_buy_id}" /><input type="submit"  value=" " id="ToBuy"/>
+                                        </div>
+                                        <ul class="gr_price">
+                                    		<li>
+                                        		<strong>原价</strong>
+												<del>￥{$group_buy.market_price}</del>
+                                        	</li>
+                                        	<li>
+                                        		<strong>折扣</strong>
+                                            	<b>
+                                            		<span>{$group_buy.zhekou}</span>折
+                                            	</b>
+                                        	</li>
+                                        	<li>
+                                        		<strong>节省</strong>
+                                            	<em>
+													<span>¥{$group_buy.jiesheng}</span>
+												</em>
+                                        	</li>
+                                    	</ul>
+                                        <!-- {if $specification}  -->
+                                        <!-- {foreach from=$specification item=spec key=spec_key} 循环规格开始 -->
+                                        <div class="size_img_box" style=" margin-top:0">
+                                        	<strong class="title">选择尺码：</strong>
+                                            <div class="clearfix size_listn">
+                                            	<!-- {foreach from=$spec.values item=value key=key} -->
+                                                	<a title="[[{if $value.price gt 0}{$lang.plus}{elseif $value.price lt 0}{$lang.minus}{/if} {$value.format_price|abs}]]" name="{$value.id}" href="javascript:;" onclick="changeAtt(this)" {if $key eq 0}class="cattsel"{/if} style=" text-decoration:none">{$value.label}<input type="radio" {if $key eq 0}checked{/if} value="{$value.id}" name="spec_{$spec_key}" id="spec_value_{$value.id}" style="display:none"></a>
+                                                <!-- {/foreach} -->
+                                            </div>
+                                            <input type="hidden" value="{$key}" name="spec_list">
+                                        </div>
+                                        <!-- {/foreach} 循环规格结束 -->
+                                        <!-- {/if}  -->
+                                        <div style=" clear:both"></div>
+                                        <div class="buy_num">
+                                        	<strong class="title">选择件数：</strong>
+                                            <img style="cursor:pointer;" onclick="buyNumber.minus()" src="images/tg2_goods_cut.gif">
+                                            <input name="number" type="text"   value="1" defaultnumber="1" onblur="changePrice()" id="product_num" class="input">
+                                            <img style="cursor:pointer;" onclick="buyNumber.plus()" src="images/tg2_goods_add.gif">
+                                        </div>
+                                        <script>
+                       	
+						
+                                // add by liuguichun 2011-7-19
+                                var buyNumber = {
+                                    maxNumber : 10,
+                                    minNumber : 1,
+									
+                                    defaultNumber : function(){
+                                        var defaultnumber = $('#product_num').attr('defaultnumber');
+                                        defaultnumber = parseInt(defaultnumber)
+                                        if(defaultnumber < 1){
+                                            defaultnumber = 1;
+                                        };
+								
+                                        return defaultnumber;
+										
+										
+                                    },
+                                                                                                                                    
+                                    goodNumber : function(num){
+                                        if(typeof(num) == 'number'){
+                                            return document.getElementById('product_num').value = num;
+											
+											
+                                        }else{
+                                            return parseInt(document.getElementById('product_num').value);
+                                        }
+                                                                                                                                        
+                                    },
+                                    plus : function(){
+                                        var num = buyNumber.goodNumber() + buyNumber.defaultNumber();
+                                        if(num <= buyNumber.maxNumber){
+                                            buyNumber.goodNumber(num);
+                                        }
+                                    },
+                                    minus : function(){
+                                        var num = buyNumber.goodNumber() - buyNumber.defaultNumber();
+                                        if(num >= buyNumber.minNumber){
+                                            buyNumber.goodNumber(num);
+                                        }
+                                    }
+                                                                                                                                   
+                                }
+								
+								
+                            </script>
+                                        <p class="gr_share_t">
+											<strong>{$group_buy.valid_goods}</strong>
+											人已购买
+										</p>
+                                        <div class="gr_time">
+                                    		<span class="gr_time_t">距离团购结束还有</span>
+                  							
+                                    		<div id="timer" class="topTable_timer"><p class="end_date" value="{$group_buy.end_date}"></p></div>
+                                    	</div>
+                                        <div class="clearfix padl22">
+                                    		<a target="_blank" href="#image_film">
+												<p class="gr_btnBot">商品描述</p>
+											</a>
+											<a target="_blank" href="#customer_com">
+												<p class="gr_btnBot">顾客评论</p>
+											</a>
+                                    	</div>
+                                    </div>
+                                    <div class="gr_goods_detalr">
+                                		<div class="goods_big_tp">
+                                    	<a href="{$group_buy.url}"><img src="{$group_buy.goods_img}" border="0" alt="{$group_buy.goods_name|escape:html}"></a>
+                                    </div>
+                                	</div>
+                                </div>
+                            </div>
+                            
+                            <div class="gr_mian_r">
+                        	<!-- TemplateBeginEditable name="团购详细页广告1" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable --> 
+							<!-- TemplateBeginEditable name="团购详细页广告2" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mt30"></div>
+    <!-- #BeginLibraryItem "/library/gr_goods_nav.lbi" --> <!-- #EndLibraryItem -->
+    <div class="wrap_1200">
+  		<div class="goods_part1">
+        	<div class="sp_r_shadow">
+            	<div class="sp_l_shadow">
+                	<a id="image_film"></a>
+                	<h3 class="index_tit_lin" style="font-weight:400">商品描述</h3>
+                    <div class="goods_niuzai_img">
+                    	{$gb_goods.goods_desc}
+                    </div>
+                    
+                    <a id="customer_com"></a>
+					<h3 class="index_tit_lin" style="font-weight:400">顾客评论</h3>
+                    
+                    <div class="mt10" ></div>
+                    
+                    <div class="comment" id="i-comment">
+                    	<div class="comment_box">
+                        	<div class="comment_main">
+                            	<div class="ztpf">
+                                	<div class="ztpf_1">
+                                    	<div class="pingfen">
+                                        	<table cellspacing="0" cellpadding="0" border="0">
+                                            	<tr>
+                                                	<td valign="top">
+                                                    	<div class="txt">
+															<p>综合评分：</p>
+														</div>
+                                                    </td>
+                                                    <td class="pingfe_star">
+                                                    	<p class="clearfix">
+                                                        	<sub class="SpriteStar2_on">好评</sub>
+                                                    		<sup>
+                                                        		<strong style="width: {$comment_percent.haoping_percent}%;">
+                                                            	
+                                                            	</strong>
+                                                        	</sup>
+                                                            <a>{$comment_percent.haoping_percent}%</a>
+                                                        </p>
+                                                        <p class="clearfix">
+                                                        	<sub class="SpriteStar2_on">中评</sub>
+                                                    		<sup>
+                                                        		<strong style="width: {$comment_percent.zhongping_percent}%;">
+                                                            	
+                                                            	</strong>
+                                                        	</sup>
+                                                            <a>{$comment_percent.zhongping_percent}%</a>
+                                                        </p>
+                                                        <p class="clearfix">
+                                                        	<sub class="SpriteStar2_on">差评</sub>
+                                                    		<sup>
+                                                        		<strong style="width: {$comment_percent.chaping_percent}%;">
+                                                            	
+                                                            	</strong>
+                                                        	</sup>
+                                                            <a>{$comment_percent.chaping_percent}%</a>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="ztpf_1">
+                                    	<p class="ztpf_p">
+                                        	<img src="images/commentall.png" alt="">
+                                            已购买用户可在当前页以及"会员中心"中进行评论
+                                        </p>
+                                        <p class="ztpf_p">
+											<img src="images/fractiondesc.png" alt="">
+											查看详细积分使用规则
+										</p>
+                                    </div>
+                                    <div class="ztpf_r">
+                                    	<p>与其他人分享您的观点</p>
+                                        <p>
+											<a href="javascript:void(0);" class="btn_comm" id="showcommentform">我要写评价</a>
+										</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" clearfix"></div>
+                    <div id="comment_date">
+                    	<!-- #BeginLibraryItem "/library/comments.lbi" --> {insert_scripts files='transport.js,utils.js'}
+                  <div id="ECS_COMMENT"> {* ECSHOP 提醒您：动态载入comments_list.lbi，显示评论列表和评论表单 *}{insert name='comments' type=$type id=$id}</div>
+                  <!-- #EndLibraryItem -->
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+  </form>
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
+</body>
+<script type="text/javascript">
+var gmt_end_time = "{$group_buy.gmt_end_date|default:0}";
+{foreach from=$lang.goods_js item=item key=key}
+var {$key} = "{$item}";
+{/foreach}
+var now_time = {$now_time};
+<!-- {literal} -->
+
+onload = function()
+{
+  try
+  {
+    onload_leftTime();
+  }
+  catch (e)
+  {}
+}
+<!-- {/literal} -->
+</script>
+</html>

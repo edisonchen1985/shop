@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link href="{$ecs_css_path}" rel="stylesheet" type="text/css" />
+<!-- {if $cat_style} -->
+<link href="{$cat_style}" rel="stylesheet" type="text/css" />
+<!-- {/if} -->
+{* 包含脚本文件 *}
+{insert_scripts files='jquery-1.9.1.min.js,jquery.json.js'}
+{insert_scripts files='common.js,global.js,compare.js'}
+</head>
+<body>
+<!-- #BeginLibraryItem "/library/page_header.lbi" --><!-- #EndLibraryItem -->
+
+<div class="menu_box_navbg"></div>
+
+<!-- #BeginLibraryItem "/library/category_tree_index.lbi" --> <!-- #EndLibraryItem -->
+
+<div class="wrap_bg">
+	<div class="in_banner">
+    	<div class="banner_m" style="position:relative; z-index:1">
+    		<!-- #BeginLibraryItem "/library/index_ad_category.lbi" --> <!-- #EndLibraryItem -->
+        </div>
+    </div>
+    <div class="wrap_1200">
+    	<div class="in_menu_wr">
+        	<a class="in_menu_jia" href="javascript:;"></a>
+            <div class="in_menu">
+            	<!-- #BeginLibraryItem "/library/zuhesousuo.lbi" --><!-- #EndLibraryItem -->
+                <!-- #BeginLibraryItem "/library/paixu.lbi" --><!-- #EndLibraryItem -->
+            </div>
+        </div>
+        <script type="text/javascript">
+                                $(function(){
+                                    $(".in_menu_left ul li").hover(
+                                    function(){
+                                        $(this).css("background","#90a062")
+                                        .children("a").css({"color":"#fff","background":"url(themes/masamasuo/images/masa_chi_02.jpg) no-repeat right 19px"});
+                                        },function(){
+                                            $(this).removeAttr("style").children("a").removeAttr("style")
+                                            });
+                                    $(".in_menu_jia").click(function(){
+                                        $(this).toggleClass("in_menu_jian");
+                                        $(".in_selr").toggle();
+                                        });
+                                    $(".in_menu_left").click(function(){
+                                            $(".in_selr").toggle()
+                                            $(".in_menu_jia").toggleClass("in_menu_jian")
+                                        })	
+                                    
+							
+                                 });
+                                   
+                                
+                               
+                            </script>
+        <div class="in_masa">
+        <!-- #BeginLibraryItem "/library/goods_list.lbi" --><!-- #EndLibraryItem -->
+        </div>
+        <div class="foot_add">
+        	<!-- TemplateBeginEditable name="分类页底部广告" -->
+<!-- #BeginLibraryItem "/library/ad_position.lbi" -->
+
+{insert name='ads' id=$ads_id num=$ads_num}
+ <!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->	
+        </div>
+    </div>
+</div>
+
+<!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem -->
+
+</body>
+</html>
