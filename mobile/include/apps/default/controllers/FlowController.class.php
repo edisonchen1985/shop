@@ -121,12 +121,13 @@ class FlowController extends CommonController {
         $fittings_list = model('Goods')->get_goods_fittings($parent_list);
         $order = array();
         $order ['order_sn'] = get_order_sn(); // 获取新订单号
-        $order ['order_amount'] = number_format($cart_goods ['total']['goods_price'], 2, '.', ''); //获取订单的总价格
+        $order ['order_amount'] = number_format($cart_goods ['total']['goods_amount'], 2, '.', ''); //获取订单的总价格
         /* 插入支付日志 */
         $new_order_id = M()->insert_id();
         $order ['order_id'] = $new_order_id;
         $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
         //获取微信付款的代码
+	$order['pay_id'] = 5; //pay_id 为5是微信付款
         $payment = model('Order')->payment_info($order ['pay_id']);
         include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
         $pay_obj = new $payment ['pay_code'] ();
