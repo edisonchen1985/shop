@@ -74,6 +74,63 @@ class FlowController extends CommonController {
         $this->assign('title', L('shopping_cart'));
         $this->display('flow.dwt');
     }
+    /**
+     * Add on 2017-06-04 By Edison: 购物车直接付款，然后再填写用户的账户信息
+     */
+    public function index_direct() {
+        $_SESSION['flow_type'] = CART_GENERAL_GOODS;
+        /* 如果是一步购物，跳到结算中心 */
+        if (C('one_step_buy') == '1') {
+            ecs_header("Location: " . url('flow/checkout') . "\n");
+        }
+
+        // 取得商品列表，计算合计
+        $cart_goods = model('Order')->get_cart_goods();
+        $this->assign('goods_list', $cart_goods ['goods_list']);
+        $this->assign('total', $cart_goods ['total']);
+
+        if ($cart_goods['goods_list']) {
+            // 相关产品
+            $linked_goods = model('Goods')->get_linked_goods($cart_goods ['goods_list']);
+            $this->assign('linked_goods', $linked_goods);
+        }
+
+        // 购物车的描述的格式化
+        $this->assign('shopping_money', sprintf(L('shopping_money'), $cart_goods ['total'] ['goods_price']));
+        $this->assign('market_price_desc', sprintf(L('than_market_price'), $cart_goods ['total'] ['market_price'], $cart_goods ['total'] ['saving'], $cart_goods ['total'] ['save_rate']));
+
+        // 取得优惠活动
+        $favourable_list = model('Flow')->favourable_list_flow($_SESSION ['user_rank']);
+
+        usort($favourable_list, array("FlowModel", "cmp_favourable"));
+        $this->assign('favourable_list', $favourable_list);
+
+        // 计算折扣
+        $discount = model('Order')->compute_discount();
+        $this->assign('discount', $discount ['discount']);
+
+        // 折扣信息
+        $favour_name = empty($discount ['name']) ? '' : join(',', $discount ['name']);
+        $this->assign('your_discount', sprintf(L('your_discount'), $favour_name, price_format($discount ['discount'])));
+
+        // 增加是否在购物车里显示商品图
+        $this->assign('show_goods_thumb', C('show_goods_in_cart'));
+
+        // 增加是否在购物车里显示商品属性
+        $this->assign('show_goods_attribute', C('show_attr_in_cart'));
+
+        // 取得购物车中基本件ID
+        $condition = "session_id = '" . SESS_ID . "' " . "AND rec_type = '" . CART_GENERAL_GOODS . "' " . "AND is_gift = 0 " . "AND extension_code <> 'package_buy' " . "AND parent_id = 0 ";
+        $parent_list = $this->model->table('cart')->field('goods_id')->where($condition)->getCol();
+        //根据基本件id获取 购物车中商品配件列表
+        $fittings_list = model('Goods')->get_goods_fittings($parent_list);
+        $this->assign('fittings_list', $fittings_list);
+        $this->assign('currency_format', C('currency_format'));
+        $this->assign('integral_scale', C('integral_scale'));
+        $this->assign('step', 'cart');
+        $this->assign('title', L('shopping_cart'));
+        $this->display('flow_direct.dwt');
+    }
 
     /**
      * 获取购物车内的相关配件
@@ -124,7 +181,12 @@ class FlowController extends CommonController {
     public function cart() {
         $this->index();
     }
-
+    /**
+     * 购物车列表 连接到index
+     */
+    public function cart_direct() {
+        $this->index_direct();
+    }
     /**
      * 立即购买
      */
