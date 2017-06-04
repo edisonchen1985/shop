@@ -79,11 +79,6 @@ class FlowController extends CommonController {
      */
     public function index_direct() {
         $_SESSION['flow_type'] = CART_GENERAL_GOODS;
-        /* 如果是一步购物，跳到结算中心 */
-        if (C('one_step_buy') == '1') {
-            ecs_header("Location: " . url('flow/checkout') . "\n");
-        }
-
         // 取得商品列表，计算合计
         $cart_goods = model('Order')->get_cart_goods();
         $this->assign('goods_list', $cart_goods ['goods_list']);
@@ -124,11 +119,25 @@ class FlowController extends CommonController {
         $parent_list = $this->model->table('cart')->field('goods_id')->where($condition)->getCol();
         //根据基本件id获取 购物车中商品配件列表
         $fittings_list = model('Goods')->get_goods_fittings($parent_list);
+        $order = array();
+        $order ['order_sn'] = get_order_sn(); // 获取新订单号
+        $order ['order_amount'] = number_format($cart_goods ['total']['goods_price'], 2, '.', ''); //获取订单的总价格
+        /* 插入支付日志 */
+        $new_order_id = M()->insert_id();
+        $order ['order_id'] = $new_order_id;
+        $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
+        //获取微信付款的代码
+        $payment = model('Order')->payment_info($order ['pay_id']);
+        include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
+        $pay_obj = new $payment ['pay_code'] ();
+        $pay_online = $pay_obj->get_code_direct($order, unserialize_config($payment ['pay_config']));
+        $this->assign('pay_online', $pay_online);
+
         $this->assign('fittings_list', $fittings_list);
         $this->assign('currency_format', C('currency_format'));
         $this->assign('integral_scale', C('integral_scale'));
         $this->assign('step', 'cart');
-        $this->assign('title', L('shopping_cart'));
+        $this->assign('title', '购物结算');
         $this->display('flow_direct.dwt');
     }
 

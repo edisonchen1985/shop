@@ -43,11 +43,11 @@
   </section>
   <!-- {if $fittings_list} -->
      <div class="two-btn flow-jiesuan ect-padding-tb ect-padding-lr text-center">
-        <a class="btn btn-info ect-bg-colory" type="button"  href="{:url('flow/checkout')}">立即结账</a>
+        <p class="ect-margin-tb text-center">{$pay_online}</p>
 	</div>
   <!-- {else} -->
   	<div class="flow-jiesuan ect-padding-lr ect-padding-tb">
-  	<a href="{:url('flow/checkout')}" type="button" class="btn btn-info ect-btn-info ect-bg">立即结账</a>
+      <p class="ect-margin-tb text-center">{$pay_online}</p>
   </div>
   <!-- {/if} -->
   <!-- {if $linked_goods} 关联商品-->
