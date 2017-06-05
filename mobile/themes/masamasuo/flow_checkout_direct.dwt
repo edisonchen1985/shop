@@ -21,12 +21,12 @@
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
         <p><b> 订单备注 </b></p>
         <i class="fa fa-angle-down"></i> </a>
-        <div id="collapseFive" class="panel-collapse collapse in">
+        <div id="collapseFive" class="panel-collapse collapse">
           <input name="" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
         </div>
       </section>
       <div class="ect-padding-lr ect-padding-tb ect-margin-tb">
-        <input type="submit" name="submit" value="{$lang.order_submit}" class="btn btn-info ect-btn-info ect-colorf ect-bg"/>
+        <input type="submit" name="submit" value="确认提交" class="btn btn-info ect-btn-info ect-colorf ect-bg"/>
         <input type="hidden" name="step" value="done" />
       </div>
     </form>
