@@ -7,8 +7,8 @@
 <!-- #BeginLibraryItem "/flow_label_favourable.dwt" --><!-- #EndLibraryItem -->
 <!-- {/if} -->
 
-<!-- {if $step eq "checkout"} 开始订单确认界面 -->
-<!-- #BeginLibraryItem "/flow_checkout.dwt" --><!-- #EndLibraryItem -->
+<!-- {if $step eq "checkout_direct"} 开始订单确认界面 -->
+<!-- #BeginLibraryItem "/flow_checkout_direct.dwt" --><!-- #EndLibraryItem -->
 <!-- {/if} -->
 
 <!-- {if $step eq "done"} 订单提交成功 -->
