@@ -1,0 +1,34 @@
+<div class="con">
+  <div class="ect-bg">
+    <header class="ect-header ect-margin-tb ect-margin-lr text-center ect-bg icon-write"> <a href="javascript:history.go(-1)" class="pull-left ect-icon ect-icon1 ect-icon-history"></a> <span>{$title}</span> <a href="javascript:;" onClick="openMune()" class="pull-right ect-icon ect-icon1 ect-icon-mune"></a></header>
+    <nav class="ect-nav ect-nav-list" style="display:none;"> <!-- #BeginLibraryItem "/library/page_menu.lbi" --><!-- #EndLibraryItem --> </nav>
+  </div>
+  <div class="flow-checkout">
+    <form action="{:url('flow/done')}" method="post" name="theForm" id="theForm" onSubmit="return checkOrderForm(this)">
+      <script type="text/javascript">
+        var flow_no_payment = "{$lang.flow_no_payment}";
+        var flow_no_shipping = "{$lang.flow_no_shipping}";
+        </script><a href="{:url('flow/consignee_list')}">
+      <section class="ect-margin-tb ect-padding-lr ect-padding-tb checkout-add">
+          <label for="addressId{$con_list.address_id}">
+          <p class="title">{$consignee.consignee|escape} <span>{$consignee.mobile}</span></p>
+          <p>{$consignee.address}</p>
+          <i class="fa fa-angle-right"></i>
+          </label>
+        </section>
+      </a>
+      <section class="ect-margin-tb ect-padding-lr checkout-select"> 
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">
+        <p><b> 订单备注 </b></p>
+        <i class="fa fa-angle-down"></i> </a>
+        <div id="collapseFive" class="panel-collapse collapse in">
+          <input name="" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
+        </div>
+      </section>
+      <div class="ect-padding-lr ect-padding-tb ect-margin-tb">
+        <input type="submit" name="submit" value="{$lang.order_submit}" class="btn btn-info ect-btn-info ect-colorf ect-bg"/>
+        <input type="hidden" name="step" value="done" />
+      </div>
+    </form>
+  </div>
+</div>

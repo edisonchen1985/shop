@@ -740,6 +740,55 @@ class FlowController extends CommonController {
 
         $this->display('flow.dwt');
     }
+    /**
+     * Add on 2017-06-04 By Edison: 购物车直接付款，然后再填写用户的账户信息订单确认
+     */
+    public function checkout_direct() {
+        /* 取得购物类型 */
+        $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
+        /* 团购标志 */
+        if ($flow_type == CART_GROUP_BUY_GOODS) {
+            $this->assign('is_group_buy', 1);
+        } /* 积分兑换商品 */ elseif ($flow_type == CART_EXCHANGE_GOODS) {
+            $this->assign('is_exchange_goods', 1);
+        } else {
+            // 正常购物流程 清空其他购物流程情况
+            $_SESSION ['flow_order'] ['extension_code'] = '';
+        }
+
+        //  检查用户是否已经登录 如果用户已经登录了则检查是否有默认的收货地址 如果没有登录则跳转到登录和注册页面
+        if (empty($_SESSION ['direct_shopping']) && $_SESSION ['user_id'] == 0) {
+            /* 用户没有登录且没有选定匿名购物，转向到登录页面 */
+            $this->redirect(url('user/login',array('step'=>'flow')));
+            exit;
+        }
+        // 获取收货人信息
+        $consignee = model('Order')->get_consignee($_SESSION ['user_id']);
+        /* 检查收货人信息是否完整 */
+        if (!model('Order')->check_consignee_info($consignee, $flow_type)) {
+            /* 如果不完整则转向到收货人信息填写界面 */
+            ecs_header("Location: " . url('flow/consignee_list') . "\n");
+        }
+        // 获取配送地址
+        $consignee_list = model('Users')->get_consignee_list($_SESSION ['user_id']);
+        $this->assign('consignee_list', $consignee_list);
+        //获取默认配送地址
+        $address_id = $this->model->table('users')->field('address_id')->where("user_id = '" . $_SESSION['user_id'] . "' ")->getOne();
+        $this->assign('address_id', $address_id);
+
+        $_SESSION ['flow_consignee'] = $consignee;
+        $this->assign('consignee', $consignee);
+
+
+
+        /* 保存 session */
+        $_SESSION ['flow_order'] = $order;
+        model('Common')->assign_dynamic('shopping_flow');
+        $this->assign('step', ACTION_NAME);
+        $this->assign('title', '完善订单信息');
+
+        $this->display('flow_direct.dwt');
+    }
 
     /**
      * 登录信息
