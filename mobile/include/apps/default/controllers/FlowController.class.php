@@ -120,16 +120,35 @@ class FlowController extends CommonController {
         //根据基本件id获取 购物车中商品配件列表
         $fittings_list = model('Goods')->get_goods_fittings($parent_list);
         $order = array();
-        $order ['order_sn'] = get_order_sn(); // 获取新订单号
+        
         $order ['order_amount'] = number_format($cart_goods ['total']['goods_amount'], 2, '.', ''); //获取订单的总价格
+        $order ['goods_amount'] = $order ['order_amount'];
         /* 插入支付日志 */
         $new_order_id = M()->insert_id();
         $order ['order_id'] = $new_order_id;
         $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
         //获取微信付款的代码
-	$order['pay_id'] = 5; //pay_id 为5是微信付款
+	    $order['pay_id'] = 5; //pay_id 为5是微信付款
         $payment = model('Order')->payment_info($order ['pay_id']);
         include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
+        $order ['add_time'] = gmtime();
+        $order ['user_id'] = $_SESSION ['user_id'];
+        $order ['order_status'] = OS_UNCONFIRMED;
+        $order ['shipping_status'] = SS_UNSHIPPED;
+        $order ['pay_status'] = PS_UNPAYED;
+        /* 插入订单表 */
+        $error_no = 0;
+        do {
+            $order ['order_sn'] = get_order_sn(); // 获取新订单号
+            $new_order = model('Common')->filter_field('order_info', $order);
+            $this->model->table('order_info')->data($new_order)->insert();
+            $error_no = M()->errno();
+            if ($error_no > 0 && $error_no != 1062) {
+                die(M()->errorMsg());
+            }
+        } while ($error_no == 1062); // 如果是订单号重复则重新提交数据
+        //订单入库
+
         $pay_obj = new $payment ['pay_code'] ();
         $pay_online = $pay_obj->get_code_direct($order, unserialize_config($payment ['pay_config']));
         $this->assign('pay_online', $pay_online);
