@@ -110,7 +110,7 @@ class wxpay
             WeixinJSBridge.invoke("getBrandWCPayRequest",' . $jsApiParameters . ',function(res){if(res.err_msg == "get_brand_wcpay_request:ok"){
                 var xmlhttp;
                 xmlhttp=new XMLHttpRequest();
-                xmlhttp.open("GET","http://xingsom.com/data/index.php/Home/Alidayu/notify/time/" + Math.random(),true);                                        
+                xmlhttp.open("GET","http://xingsom.com" + Math.random(),true);                                        
                 xmlhttp.send();
                 location.href="http://xingsom.com/shop/mobile/index.php?m=default&c=flow&a=checkout_direct&order_sn='.$order['order_sn'].'"}else{location.href="' . return_url(basename(__FILE__, '.php'), false, array('status' => 0)) . '"}});}function callpay(){if (typeof WeixinJSBridge == "undefined"){if( document.addEventListener ){document.addEventListener("WeixinJSBridgeReady", jsApiCall, false);}else if (document.attachEvent){document.attachEvent("WeixinJSBridgeReady", jsApiCall);document.attachEvent("onWeixinJSBridgeReady", jsApiCall);}}else{jsApiCall();}}
             </script>';

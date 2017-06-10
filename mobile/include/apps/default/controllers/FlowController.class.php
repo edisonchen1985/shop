@@ -766,6 +766,10 @@ class FlowController extends CommonController {
      * Add on 2017-06-04 By Edison: 购物车直接付款，然后再填写用户的账户信息订单确认
      */
     public function checkout_direct() {
+        $order_sn = $_GET['order_sn'];//获取订单号
+        $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
+        
+
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
         /* 团购标志 */
@@ -1701,6 +1705,11 @@ class FlowController extends CommonController {
         $data['district'] = $order['district'];
         $data['address'] = $order['address'];
         $data['mobile'] = $order['mobile'];
+        /* 修改订单状态为已付款 */
+        $data['confirm_time'] = gmtime();
+        $data['order_status'] = 5;
+        $data['pay_time'] = gmtime();
+        $data['pay_status'] = 2;
         $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单增加收货信息
         $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
 
