@@ -124,9 +124,7 @@ class FlowController extends CommonController {
         
         $order ['order_amount'] = number_format($cart_goods ['total']['goods_amount'], 2, '.', ''); //获取订单的总价格
         $order ['goods_amount'] = $order ['order_amount'];
-        /* 插入支付日志 */
-        $new_order_id = M()->insert_id();
-        $order ['order_id'] = $new_order_id;
+        
         $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
         //获取微信付款的代码
 	    $order['pay_id'] = 5; //pay_id 为5是微信付款
@@ -148,6 +146,9 @@ class FlowController extends CommonController {
                 die(M()->errorMsg());
             }
         } while ($error_no == 1062); // 如果是订单号重复则重新提交数据
+        /* 插入支付日志 */
+        $new_order_id = M()->insert_id();
+        $order ['order_id'] = $new_order_id;
         //订单入库
 
         $pay_obj = new $payment ['pay_code'] ();
@@ -774,7 +775,12 @@ class FlowController extends CommonController {
     public function checkout_direct() {
         $order_sn = $_GET['order_sn'];//获取订单号
         $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
-        
+        $data = array();
+        $data['order_status'] = 5;
+        $data['pay_time'] = gmtime();
+        $data['confirm_time'] = gmtime();
+        $data['pay_status'] = 2;
+        //$this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
 
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
@@ -1711,11 +1717,6 @@ class FlowController extends CommonController {
         $data['district'] = $order['district'];
         $data['address'] = $order['address'];
         $data['mobile'] = $order['mobile'];
-        /* 修改订单状态为已付款 */
-        $data['confirm_time'] = gmtime();
-        $data['order_status'] = 5;
-        $data['pay_time'] = gmtime();
-        $data['pay_status'] = 2;
         $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单增加收货信息
         $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
 
