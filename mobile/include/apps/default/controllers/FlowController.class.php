@@ -21,7 +21,7 @@ class FlowController extends CommonController {
      * 购物车列表
      */
     public function index() {
-		$_SESSION['flow_type'] = CART_GENERAL_GOODS;
+        $_SESSION['flow_type'] = CART_GENERAL_GOODS;
         /* 如果是一步购物，跳到结算中心 */
         if (C('one_step_buy') == '1') {
             ecs_header("Location: " . url('flow/checkout') . "\n");
@@ -124,10 +124,12 @@ class FlowController extends CommonController {
         
         $order ['order_amount'] = number_format($cart_goods ['total']['goods_amount'], 2, '.', ''); //获取订单的总价格
         $order ['goods_amount'] = $order ['order_amount'];
-        
-        
+        /* 插入支付日志 */
+        $new_order_id = M()->insert_id();
+        $order ['order_id'] = $new_order_id;
+        $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
         //获取微信付款的代码
-	    $order['pay_id'] = 5; //pay_id 为5是微信付款
+        $order['pay_id'] = 5; //pay_id 为5是微信付款
         $payment = model('Order')->payment_info($order ['pay_id']);
         include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
         $order ['add_time'] = gmtime();
@@ -140,17 +142,12 @@ class FlowController extends CommonController {
         do {
             $order ['order_sn'] = get_order_sn(); // 获取新订单号
             $new_order = model('Common')->filter_field('order_info', $order);
-            $this->model->table('order_info')->data($new_order)->insert();
+            $order_id = $this->model->table('order_info')->data($new_order)->insert();
             $error_no = M()->errno();
             if ($error_no > 0 && $error_no != 1062) {
                 die(M()->errorMsg());
             }
         } while ($error_no == 1062); // 如果是订单号重复则重新提交数据
-        /* 插入支付日志 */
-        $new_order_id = M()->insert_id();
-        $order ['order_id'] = $new_order_id;
-        $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
-        $order ['log_id'] = 0；
         //订单入库
 
         $pay_obj = new $payment ['pay_code'] ();
@@ -395,12 +392,12 @@ class FlowController extends CommonController {
             /* 查询：检查该项是否为基本件 以及是否存在配件 */
             /* 此处配件是指添加商品时附加的并且是设置了优惠价格的配件 此类配件都有parent_idgoods_number为1 */
             $sql = "SELECT b.goods_number,b.rec_id
-			FROM " . $this->model->pre . "cart a, " . $this->model->pre . "cart b
-				WHERE a.rec_id = '$key'
-				AND a.session_id = '" . SESS_ID . "'
-			AND a.extension_code <>'package_buy'
-			AND b.parent_id = a.goods_id
-			AND b.session_id = '" . SESS_ID . "'";
+            FROM " . $this->model->pre . "cart a, " . $this->model->pre . "cart b
+                WHERE a.rec_id = '$key'
+                AND a.session_id = '" . SESS_ID . "'
+            AND a.extension_code <>'package_buy'
+            AND b.parent_id = a.goods_id
+            AND b.session_id = '" . SESS_ID . "'";
 
             $offers_accessories_res = $this->model->query($sql);
 
@@ -595,7 +592,7 @@ class FlowController extends CommonController {
                 $insure_disabled = ($val ['insure'] == 0);
                 $cod_disabled = ($val ['support_cod'] == 0);
             }
-	        // 兼容过滤ecjia配送方式
+            // 兼容过滤ecjia配送方式
             if (substr($val['shipping_code'], 0 , 5) == 'ship_') {
                 unset($shipping_list[$key]);
             }
@@ -777,12 +774,7 @@ class FlowController extends CommonController {
     public function checkout_direct() {
         $order_sn = $_GET['order_sn'];//获取订单号
         $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
-        $data = array();
-        $data['order_status'] = 5;
-        $data['pay_time'] = gmtime();
-        $data['confirm_time'] = gmtime();
-        $data['pay_status'] = 2;
-        $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
+        
 
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
@@ -983,7 +975,7 @@ class FlowController extends CommonController {
             /* 返回收货人页面代码 */
             $this->assign('real_goods_count', model('Order')->exist_real_goods(0, $flow_type) ? 1 : 0 );
         } else {
-            /*  保存收货人信息 	 */
+            /*  保存收货人信息      */
             $consignee = array(
                 'address_id' => empty($_POST ['address_id']) ? 0 : intval($_POST ['address_id']),
                 'consignee' => empty($_POST ['consignee']) ? '' : I('post.consignee'),
@@ -1719,6 +1711,11 @@ class FlowController extends CommonController {
         $data['district'] = $order['district'];
         $data['address'] = $order['address'];
         $data['mobile'] = $order['mobile'];
+        /* 修改订单状态为已付款 */
+        $data['confirm_time'] = gmtime();
+        $data['order_status'] = 5;
+        $data['pay_time'] = gmtime();
+        $data['pay_status'] = 2;
         $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单增加收货信息
         $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
 
