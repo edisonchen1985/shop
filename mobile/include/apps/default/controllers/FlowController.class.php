@@ -149,7 +149,7 @@ class FlowController extends CommonController {
             }
         } while ($error_no == 1062); // 如果是订单号重复则重新提交数据
         //订单入库
-
+        $new_order_id = M()->insert_id();
         $pay_obj = new $payment ['pay_code'] ();
         $pay_online = $pay_obj->get_code_direct($order, unserialize_config($payment ['pay_config']));
         $this->assign('pay_online', $pay_online);
@@ -774,6 +774,12 @@ class FlowController extends CommonController {
     public function checkout_direct() {
         $order_sn = $_GET['order_sn'];//获取订单号
         $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
+        $data = array();
+        $data['order_status'] = 5;
+        $data['pay_time'] = gmtime();
+        $data['confirm_time'] = gmtime();
+        $data['pay_status'] = 2;
+        $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
         
 
         /* 取得购物类型 */
