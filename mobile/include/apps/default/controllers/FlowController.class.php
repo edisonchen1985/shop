@@ -125,7 +125,7 @@ class FlowController extends CommonController {
         $order ['order_amount'] = number_format($cart_goods ['total']['goods_amount'], 2, '.', ''); //获取订单的总价格
         $order ['goods_amount'] = $order ['order_amount'];
         
-        $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
+        
         //获取微信付款的代码
 	    $order['pay_id'] = 5; //pay_id 为5是微信付款
         $payment = model('Order')->payment_info($order ['pay_id']);
@@ -140,7 +140,7 @@ class FlowController extends CommonController {
         do {
             $order ['order_sn'] = get_order_sn(); // 获取新订单号
             $new_order = model('Common')->filter_field('order_info', $order);
-            $order_id = $this->model->table('order_info')->data($new_order)->insert();
+            $this->model->table('order_info')->data($new_order)->insert();
             $error_no = M()->errno();
             if ($error_no > 0 && $error_no != 1062) {
                 die(M()->errorMsg());
@@ -149,6 +149,7 @@ class FlowController extends CommonController {
         /* 插入支付日志 */
         $new_order_id = M()->insert_id();
         $order ['order_id'] = $new_order_id;
+        $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
         //订单入库
 
         $pay_obj = new $payment ['pay_code'] ();
