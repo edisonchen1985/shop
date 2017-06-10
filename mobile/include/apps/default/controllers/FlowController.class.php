@@ -1650,6 +1650,36 @@ class FlowController extends CommonController {
 
         $this->display('flow.dwt');
     }
+    /**
+     *  完善订单并显示
+     */
+    public function done_direct() {
+        
+         // 获取收货人信息
+        $consignee = model('Order')->get_consignee($_SESSION ['user_id']);
+        // $consignee ['country'],
+        // $consignee ['province'],
+        // $consignee ['city'],
+        // $consignee ['district']
+        $order = array();
+        /* 收货人信息 */
+        foreach ($consignee as $key => $value) {
+            $order [$key] = addslashes($value);
+        }
+        var_dump($order);
+
+        $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
+
+        unset($_SESSION ['flow_consignee']); // 清除session中保存的收货人信息
+        unset($_SESSION ['flow_order']);
+        unset($_SESSION ['direct_shopping']);
+
+        $this->assign('step', ACTION_NAME);
+
+        $this->assign('title', L('order_submit'));
+
+        $this->display('flow_direct.dwt');
+    }
 
     /**
      * 改变支付方式

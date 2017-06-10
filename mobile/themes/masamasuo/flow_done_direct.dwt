@@ -1,0 +1,16 @@
+
+<div class="con">
+  <div class="ect-bg">
+  <header class="ect-header ect-margin-tb ect-margin-lr text-center ect-bg icon-write"> <a href="javascript:history.go(-1)" class="pull-left ect-icon ect-icon1 ect-icon-history"></a> <span>{$title}</span> <a href="javascript:;" onClick="openMune()" class="pull-right ect-icon ect-icon1 ect-icon-mune"></a></header>
+  <nav class="ect-nav ect-nav-list" style="display:none;"> <!-- #BeginLibraryItem "/library/page_menu.lbi" --><!-- #EndLibraryItem --> </nav>
+</div>
+  <section class="ect-bg-colorf ect-padding-lr flow-done">
+  		<i class="glyphicon glyphicon-ok"></i>
+        <p class="ect-margin-tb">感谢您在本店购物！您的订单已提交成功，我们会尽快安排发货给您，请注意查收。</p>
+        <!--{if $virtual_card}-->
+        <div class="alert alert-warning" role="alert" style="height: 100px;">
+		</div>
+        <!-- {/if} -->
+        <p class="ect-margin-tb text-center">{$order_submit_back}</p>
+  </section>
+</div>
