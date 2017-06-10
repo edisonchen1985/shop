@@ -9,8 +9,7 @@
       function checkOrderDirectForm(){
 
       }
-        </script><a href="{:url('flow/consignee_list')}">
-      }
+        </script><a href="{:url('flow/consignee_list_direct')}">
       <section class="ect-margin-tb ect-padding-lr ect-padding-tb checkout-add">
           <label for="addressId{$con_list.address_id}">
           <p class="title"><span id="consignee">{$consignee.consignee|escape}</span> <span id="mobile">{$consignee.mobile}</span></p>
