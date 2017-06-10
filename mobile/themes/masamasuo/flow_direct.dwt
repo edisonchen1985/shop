@@ -15,7 +15,9 @@
 <!-- #BeginLibraryItem "/flow_done.dwt" --><!-- #EndLibraryItem -->
 <!-- {/if} -->
 
-
+<!-- {if $step eq "consignee_direct"} 开始收货人信息填写界面 -->
+<!-- #BeginLibraryItem "/flow_consignee_direct.dwt" --><!-- #EndLibraryItem -->
+<!-- {/if} --> 
 <!-- #BeginLibraryItem "/library/search.lbi" --><!-- #EndLibraryItem --> 
 <!-- #BeginLibraryItem "/library/page_footer.lbi" --><!-- #EndLibraryItem --> 
 <script type="text/javascript" src="__PUBLIC__/js/shopping_flow.js"></script>

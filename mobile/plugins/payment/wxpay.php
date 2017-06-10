@@ -112,7 +112,7 @@ class wxpay
                 xmlhttp=new XMLHttpRequest();
                 xmlhttp.open("GET","http://xingsom.com/data/index.php/Home/Alidayu/notify/time/" + Math.random(),true);                                        
                 xmlhttp.send();
-                location.href="http://xingsom.com/shop/mobile/index.php?m=default&c=flow&a=checkout_direct"}else{location.href="' . return_url(basename(__FILE__, '.php'), false, array('status' => 0)) . '"}});}function callpay(){if (typeof WeixinJSBridge == "undefined"){if( document.addEventListener ){document.addEventListener("WeixinJSBridgeReady", jsApiCall, false);}else if (document.attachEvent){document.attachEvent("WeixinJSBridgeReady", jsApiCall);document.attachEvent("onWeixinJSBridgeReady", jsApiCall);}}else{jsApiCall();}}
+                location.href="http://xingsom.com/shop/mobile/index.php?m=default&c=flow&a=checkout_direct&order_sn='.$order['order_sn'].'"}else{location.href="' . return_url(basename(__FILE__, '.php'), false, array('status' => 0)) . '"}});}function callpay(){if (typeof WeixinJSBridge == "undefined"){if( document.addEventListener ){document.addEventListener("WeixinJSBridgeReady", jsApiCall, false);}else if (document.attachEvent){document.attachEvent("WeixinJSBridgeReady", jsApiCall);document.attachEvent("onWeixinJSBridgeReady", jsApiCall);}}else{jsApiCall();}}
             </script>';
         
         $button = '<div style="text-align:center"><button class="btn-info ect-btn-info" style="background-color:#44b549;" type="button" onclick="callpay()">去付款</button></div>' . $js;

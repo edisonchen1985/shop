@@ -778,15 +778,15 @@ class FlowController extends CommonController {
         //  检查用户是否已经登录 如果用户已经登录了则检查是否有默认的收货地址 如果没有登录则跳转到登录和注册页面
         if (empty($_SESSION ['direct_shopping']) && $_SESSION ['user_id'] == 0) {
             /* 用户没有登录且没有选定匿名购物，转向到登录页面 */
-            $this->redirect(url('user/login',array('step'=>'flow')));
-            exit;
+            // $this->redirect(url('user/login',array('step'=>'flow')));
+            // exit;
         }
         // 获取收货人信息
         $consignee = model('Order')->get_consignee($_SESSION ['user_id']);
         /* 检查收货人信息是否完整 */
         if (!model('Order')->check_consignee_info($consignee, $flow_type)) {
             /* 如果不完整则转向到收货人信息填写界面 */
-            ecs_header("Location: " . url('flow/consignee_list') . "\n");
+            ecs_header("Location: " . url('flow/consignee_list_direct') . "\n");
         }
         // 获取配送地址
         $consignee_list = model('Users')->get_consignee_list($_SESSION ['user_id']);
@@ -990,6 +990,99 @@ class FlowController extends CommonController {
         $this->assign('step', ACTION_NAME);
         $this->assign('title', L('consignee_info'));
         $this->display('flow.dwt');
+    }
+    /**
+     * 收货信息
+     */
+    public function consignee_direct() {
+        if ($_SERVER ['REQUEST_METHOD'] == 'GET') {
+            /* 取得购物类型 */
+            $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
+            //收货人信息填写界面
+            if (isset($_REQUEST ['direct_shopping'])) {
+                $_SESSION ['direct_shopping'] = 1;
+            }
+
+            /* 取得国家列表、商店所在国家、商店所在国家的省列表 */
+            $this->assign('country_list', model('RegionBase')->get_regions());
+            $this->assign('shop_country', C('shop_country'));
+            $this->assign('shop_province_list', model('RegionBase')->get_regions(1, C('shop_country')));
+
+            /* 获得用户所有的收货人信息 */
+            if ($_SESSION ['user_id'] > 0) {
+                $addressId = I('get.id');
+                if ($addressId > 0) {
+                    $consignee_list[] = model('Users')->get_consignee_list($_SESSION ['user_id'], $addressId);
+                } else {
+                    $consignee_list [] = array(
+                        'country' => C('shop_country')
+                    );
+                }
+            } else {
+                if (isset($_SESSION ['flow_consignee'])) {
+                    $consignee_list = array(
+                        $_SESSION ['flow_consignee']
+                    );
+                } else {
+                    $consignee_list [] = array(
+                        'country' => C('shop_country')
+                    );
+                }
+            }
+            $this->assign('name_of_region', array(
+                C('name_of_region_1'),
+                C('name_of_region_2'),
+                C('name_of_region_3'),
+                C('name_of_region_4')
+            ));
+            $this->assign('consignee_list', $consignee_list);
+
+            /* 取得每个收货地址的省市区列表 */
+            $city_list = array();
+            $district_list = array();
+            foreach ($consignee_list as $region_id => $consignee) {
+                $consignee ['country'] = isset($consignee ['country']) ? intval($consignee ['country']) : 1;
+                $consignee ['province'] = isset($consignee ['province']) ? intval($consignee ['province']) : 0;
+                $consignee ['city'] = isset($consignee ['city']) ? intval($consignee ['city']) : 0;
+
+                $city_list [$region_id] = model('RegionBase')->get_regions(2, $consignee ['province']);
+                $district_list [$region_id] = model('RegionBase')->get_regions(3, $consignee ['city']);
+            }
+            $this->assign('province_list', model('RegionBase')->get_regions(1, $consignee ['country']));
+            $this->assign('city_list', $city_list);
+            $this->assign('district_list', $district_list);
+
+            /* 返回收货人页面代码 */
+            $this->assign('real_goods_count', model('Order')->exist_real_goods(0, $flow_type) ? 1 : 0 );
+        } else {
+            /*  保存收货人信息      */
+            $consignee = array(
+                'address_id' => empty($_POST ['address_id']) ? 0 : intval($_POST ['address_id']),
+                'consignee' => empty($_POST ['consignee']) ? '' : I('post.consignee'),
+                'country' => empty($_POST ['country']) ? '' : intval($_POST ['country']),
+                'province' => empty($_POST ['province']) ? '' : intval($_POST ['province']),
+                'city' => empty($_POST ['city']) ? '' : intval($_POST ['city']),
+                'district' => empty($_POST ['district']) ? '' : intval($_POST ['district']),
+                'address' => empty($_POST ['address']) ? '' : I('post.address'),
+                'mobile' => empty($_POST ['mobile']) ? '' : make_semiangle(I('post.mobile'))
+            );
+
+            if ($_SESSION ['user_id'] > 0) {
+                /* 如果用户已经登录，则保存收货人信息 */
+                $consignee ['user_id'] = $_SESSION ['user_id'];
+                model('Users')->save_consignee($consignee, true);
+            }
+
+            /* 保存到session */
+            $_SESSION ['flow_consignee'] = stripslashes_deep($consignee);
+            ecs_header("Location: " . url('flow/checkout_direct') . "\n");
+        }
+
+        $this->assign('currency_format', C('currency_format'));
+        $this->assign('integral_scale', C('integral_scale'));
+        $this->assign('step', ACTION_NAME);
+        $this->assign('title', L('consignee_info'));
+        $this->display('flow_direct.dwt');
     }
 
     /**
@@ -2261,6 +2354,49 @@ class FlowController extends CommonController {
         $this->assign('lang', $_LANG);
         $this->display('flow_consignee_list.dwt');
     }
+     /**
+
+     * 获取配送地址列表
+
+     */
+    public function consignee_list_direct() {
+        if (IS_AJAX) {
+            $start = $_POST ['last'];
+            $limit = $_POST ['amount'];
+            // 获得用户所有的收货人信息
+            $consignee_list = model('Users')->get_consignee_list($_SESSION['user_id'], 0, $limit, $start);
+            if ($consignee_list) {
+                foreach ($consignee_list as $k => $v) {
+                    $address = '';
+                    if ($v['province']) {
+                        $address .= model('RegionBase')->get_region_name($v['province']);
+                    }
+                    if ($v['city']) {
+                        $address .= model('RegionBase')->get_region_name($v['city']);
+                    }
+                    if ($v['district']) {
+                        $address .= model('RegionBase')->get_region_name($v['district']);
+                    }
+                    $v['address'] = $address . ' ' . $v['address'];
+                    $v['url'] = url('flow/consignee', array('id' => $v ['address_id']));
+                    $this->assign('consignee', $v);
+                    $sayList [] = array(
+                        'single_item' => ECTouch::view()->fetch('library/asynclist_info.lbi')
+                    );
+                }
+            }
+            die(json_encode($sayList));
+            exit();
+        }
+        // 赋值于模板
+        $this->assign('title', L('consignee_info'));
+        // 加载user语言包
+        require(APP_PATH . C('_APP_NAME') . '/languages/' . C('LANG') . '/user.php');
+        $_LANG = array_merge(L(), $_LANG);
+        $this->assign('lang', $_LANG);
+        $this->display('flow_consignee_list_direct.dwt');
+    }
+
 
     /**
 

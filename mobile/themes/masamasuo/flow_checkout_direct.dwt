@@ -4,15 +4,17 @@
     <nav class="ect-nav ect-nav-list" style="display:none;"> <!-- #BeginLibraryItem "/library/page_menu.lbi" --><!-- #EndLibraryItem --> </nav>
   </div>
   <div class="flow-checkout">
-    <form action="{:url('flow/done')}" method="post" name="theForm" id="theForm" onSubmit="return checkOrderForm(this)">
+    <form action="{:url('flow/done_direct')}" method="post" name="theForm" id="theForm" onSubmit="return checkOrderDirectForm(this)">
       <script type="text/javascript">
-        var flow_no_payment = "{$lang.flow_no_payment}";
-        var flow_no_shipping = "{$lang.flow_no_shipping}";
+      function checkOrderDirectForm(){
+
+      }
         </script><a href="{:url('flow/consignee_list')}">
+      }
       <section class="ect-margin-tb ect-padding-lr ect-padding-tb checkout-add">
           <label for="addressId{$con_list.address_id}">
-          <p class="title">{$consignee.consignee|escape} <span>{$consignee.mobile}</span></p>
-          <p>{$consignee.address}</p>
+          <p class="title"><span id="consignee">{$consignee.consignee|escape}</span> <span id="mobile">{$consignee.mobile}</span></p>
+          <p id="address">{$consignee.address}</p>
           <i class="fa fa-angle-right"></i>
           </label>
         </section>
@@ -22,7 +24,7 @@
         <p><b> 订单备注 </b></p>
         <i class="fa fa-angle-down"></i> </a>
         <div id="collapseFive" class="panel-collapse collapse">
-          <input name="" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
+          <input id="" name="" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
         </div>
       </section>
       <div class="ect-padding-lr ect-padding-tb ect-margin-tb">
