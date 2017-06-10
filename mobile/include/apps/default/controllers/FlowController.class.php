@@ -150,6 +150,7 @@ class FlowController extends CommonController {
         $new_order_id = M()->insert_id();
         $order ['order_id'] = $new_order_id;
         $order ['log_id'] = model('ClipsBase')->insert_pay_log($new_order_id, $order ['order_amount'], PAY_ORDER);
+        $order ['log_id'] = 0；
         //订单入库
 
         $pay_obj = new $payment ['pay_code'] ();
@@ -781,7 +782,7 @@ class FlowController extends CommonController {
         $data['pay_time'] = gmtime();
         $data['confirm_time'] = gmtime();
         $data['pay_status'] = 2;
-        //$this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
+        $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
 
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
