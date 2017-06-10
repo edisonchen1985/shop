@@ -2378,7 +2378,7 @@ class FlowController extends CommonController {
                         $address .= model('RegionBase')->get_region_name($v['district']);
                     }
                     $v['address'] = $address . ' ' . $v['address'];
-                    $v['url'] = url('flow/consignee', array('id' => $v ['address_id']));
+                    $v['url'] = url('flow/consignee_direct', array('id' => $v ['address_id']));
                     $this->assign('consignee', $v);
                     $sayList [] = array(
                         'single_item' => ECTouch::view()->fetch('library/asynclist_info.lbi')
