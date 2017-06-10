@@ -78,6 +78,7 @@ class FlowController extends CommonController {
      * Add on 2017-06-04 By Edison: 购物车直接付款，然后再填写用户的账户信息
      */
     public function index_direct() {
+        $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
         $_SESSION['flow_type'] = CART_GENERAL_GOODS;
         // 取得商品列表，计算合计
         $cart_goods = model('Order')->get_cart_goods();
@@ -133,9 +134,6 @@ class FlowController extends CommonController {
         include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
         $order ['add_time'] = gmtime();
         $order ['user_id'] = $_SESSION ['user_id'];
-//         $order ['order_status'] = OS_UNCONFIRMED;
-//         $order ['shipping_status'] = SS_UNSHIPPED;
-//         $order ['pay_status'] = PS_UNPAYED;
         $order ['order_status'] = OS_UNCONFIRMED;
         $order ['shipping_status'] = SS_UNSHIPPED;
         $order ['pay_status'] = PS_UNPAYED;
@@ -144,7 +142,7 @@ class FlowController extends CommonController {
         do {
             $order ['order_sn'] = get_order_sn(); // 获取新订单号
             $new_order = model('Common')->filter_field('order_info', $order);
-            $this->model->table('order_info')->data($new_order)->insert();
+            $order_id = $this->model->table('order_info')->data($new_order)->insert();
             $error_no = M()->errno();
             if ($error_no > 0 && $error_no != 1062) {
                 die(M()->errorMsg());
@@ -155,6 +153,14 @@ class FlowController extends CommonController {
         $pay_obj = new $payment ['pay_code'] ();
         $pay_online = $pay_obj->get_code_direct($order, unserialize_config($payment ['pay_config']));
         $this->assign('pay_online', $pay_online);
+        /* 插入订单商品 */
+        $sql = "INSERT INTO " . $this->model->pre . "order_goods( " . "order_id, goods_id, goods_name, goods_sn, product_id, goods_number, market_price, " . "goods_price, goods_attr, is_real, extension_code, parent_id, is_gift, goods_attr_id) " . " SELECT '$new_order_id', goods_id, goods_name, goods_sn, product_id, goods_number, market_price, " . "goods_price, goods_attr, is_real, extension_code, parent_id, is_gift, goods_attr_id " . " FROM " . $this->model->pre . "cart WHERE session_id = '" . SESS_ID . "' AND rec_type = '$flow_type'";
+        $this->model->query($sql);
+        // if ($cart_goods['goods_list']) {
+        //     foreach ($cart_goods['goods_list'] as $key => $value) {
+        //     }
+        // }
+        
 
         $this->assign('fittings_list', $fittings_list);
         $this->assign('currency_format', C('currency_format'));
