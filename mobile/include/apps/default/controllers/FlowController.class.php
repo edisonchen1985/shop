@@ -133,6 +133,9 @@ class FlowController extends CommonController {
         include_once (ROOT_PATH . 'plugins/payment/' . $payment ['pay_code'] . '.php');
         $order ['add_time'] = gmtime();
         $order ['user_id'] = $_SESSION ['user_id'];
+//         $order ['order_status'] = OS_UNCONFIRMED;
+//         $order ['shipping_status'] = SS_UNSHIPPED;
+//         $order ['pay_status'] = PS_UNPAYED;
         $order ['order_status'] = OS_UNCONFIRMED;
         $order ['shipping_status'] = SS_UNSHIPPED;
         $order ['pay_status'] = PS_UNPAYED;
@@ -1657,22 +1660,54 @@ class FlowController extends CommonController {
         
          // 获取收货人信息
         $consignee = model('Order')->get_consignee($_SESSION ['user_id']);
+        $order_sn = $_SESSION['sn_order_p'];
         // $consignee ['country'],
         // $consignee ['province'],
         // $consignee ['city'],
         // $consignee ['district']
+        // array(9) {
+        //   ["address_id"]=>
+        //   string(1) "0"
+        //   ["consignee"]=>
+        //   string(6) "小张"
+        //   ["country"]=>
+        //   string(0) ""
+        //   ["province"]=>
+        //   string(0) ""
+        //   ["city"]=>
+        //   string(0) ""
+        //   ["district"]=>
+        //   string(0) ""
+        //   ["address"]=>
+        //   string(0) ""
+        //   ["mobile"]=>
+        //   string(6) "113313"
+        //   ["user_id"]=>
+        //   string(2) "25"
+        // }
+
+
+
         $order = array();
         /* 收货人信息 */
         foreach ($consignee as $key => $value) {
             $order [$key] = addslashes($value);
         }
-        var_dump($order);
-
+        $data = array();
+        $data['consignee'] = $order['consignee'];
+        $data['country'] = $order['country'];
+        $data['province'] = $order['province'];
+        $data['city'] = $order['city'];
+        $data['district'] = $order['district'];
+        $data['address'] = $order['address'];
+        $data['mobile'] = $order['mobile'];
+        $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单增加收货信息
         $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
 
         unset($_SESSION ['flow_consignee']); // 清除session中保存的收货人信息
         unset($_SESSION ['flow_order']);
         unset($_SESSION ['direct_shopping']);
+        unset($_SESSION ['sn_order_p']);
 
         $this->assign('step', ACTION_NAME);
 

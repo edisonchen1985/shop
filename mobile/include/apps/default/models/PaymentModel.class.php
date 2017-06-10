@@ -137,7 +137,7 @@ class PaymentModel extends BaseModel {
                     $order = $this->row($sql);
                     $order_id = $order['order_id'];
                     $order_sn = $order['order_sn'];
-
+                    $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
                     /* 修改订单状态为已付款 */
                     $sql = 'UPDATE ' . $this->pre .
                             "order_info SET order_status = '" . OS_CONFIRMED . "', " .
