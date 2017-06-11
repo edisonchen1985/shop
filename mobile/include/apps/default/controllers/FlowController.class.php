@@ -772,16 +772,16 @@ class FlowController extends CommonController {
      * Add on 2017-06-04 By Edison: 购物车直接付款，然后再填写用户的账户信息订单确认
      */
     public function checkout_direct() {
-        $order_sn = $_GET['order_sn'];//获取订单号
-        $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
-        $data = array();
-        $data['order_status'] = 5;
-        $data['pay_time'] = gmtime();
-        $data['confirm_time'] = gmtime();
-        $data['pay_status'] = 2;
-        $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
-        
-
+        if(isset($_GET['order_sn'])){
+            $order_sn = $_GET['order_sn'];//获取订单号
+            $_SESSION ['sn_order_p'] = $order_sn; //付款成功后把此订单的订单号存进SESSION
+            $data = array();
+            $data['order_status'] = 5;
+            $data['pay_time'] = gmtime();
+            $data['confirm_time'] = gmtime();
+            $data['pay_status'] = 2;
+            $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
+        }
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
         /* 团购标志 */
@@ -820,7 +820,7 @@ class FlowController extends CommonController {
 
 
         /* 保存 session */
-        $_SESSION ['flow_order'] = $order;
+        // $_SESSION ['flow_order'] = $order;
         model('Common')->assign_dynamic('shopping_flow');
         $this->assign('step', ACTION_NAME);
         $this->assign('title', '完善订单信息');
