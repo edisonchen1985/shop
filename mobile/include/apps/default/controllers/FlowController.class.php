@@ -782,6 +782,11 @@ class FlowController extends CommonController {
             $data['pay_status'] = 2;
             $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单状态
         }
+        $flow_type = CART_GENERAL_GOODS;
+        /* 清空购物车 */
+        model('Order')->clear_cart($flow_type);
+        /* 清除缓存，否则买了商品，但是前台页面读取缓存，商品数量不减少 */
+        clear_all_files();
         /* 取得购物类型 */
         $flow_type = isset($_SESSION ['flow_type']) ? intval($_SESSION ['flow_type']) : CART_GENERAL_GOODS;
         /* 团购标志 */
