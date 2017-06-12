@@ -32,7 +32,7 @@
           </dl>
         </div>
         <div class="ect-margin-tb ect-margin-bottom0 ect-clear-over flow-num-del"> 
-          <input type="text" class="txtnum" readonly value="{$goods.goods_number}"/>
+          <input type="text" class="txtnum" readonly value="{$goods.goods_number}" style="width:20%;"/>
         </div>
       </li>
       <!-- {/foreach} -->
