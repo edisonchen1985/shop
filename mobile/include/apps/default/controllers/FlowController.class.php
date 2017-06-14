@@ -1708,7 +1708,7 @@ class FlowController extends CommonController {
         // }
 
 
-
+        $postscript = I('post.postscript',trim, '');//用户的留言
         $order = array();
         /* 收货人信息 */
         foreach ($consignee as $key => $value) {
@@ -1727,6 +1727,7 @@ class FlowController extends CommonController {
         $data['order_status'] = 5;
         $data['pay_time'] = gmtime();
         $data['pay_status'] = 2;
+        $data['postscript'] = $postscript;
         $this->model->table('order_info')->data($data)->where('order_sn = ' . $order_sn)->update();  //更新用户的订单增加收货信息
         $this->assign('order_submit_back', sprintf(L('order_submit_back'), L('back_home'), L('goto_user_center'))); // 返回提示
 
