@@ -1061,8 +1061,8 @@ function addToCartResponse_quick(result) {
         }
     } else {
         var cartInfo = document.getElementById('ECS_CARTINFO');
-        // var cart_url = 'index.php?c=flow&a=cart';
-        var cart_url = 'index.php?c=flow&a=cart_direct'; //Modified By Edison on 2017-06-11
+        var cart_url = 'index.php?c=flow&a=cart';
+        // var cart_url = 'index.php?c=flow&a=cart_direct'; //Modified By Edison on 2017-06-11
         //var cart_url = 'flow.php?step=cart';
         if (cartInfo) {
             cartInfo.innerHTML = result.content;
