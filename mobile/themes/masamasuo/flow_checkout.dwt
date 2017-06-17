@@ -186,7 +186,7 @@
         <p><b> 订单备注 </b></p>
         <i class="fa fa-angle-down"></i> </a>
         <div id="collapseFive" class="panel-collapse collapse in">
-          <input name="" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
+          <input name="postscript" type="text" class="fuyan" placeholder="如果您对款式或颜色有要求，可以留言哦！">
         </div>
       </section>
       <section class="ect-margin-tb ect-margin-bottom0 ect-padding-lr checkout-select checkout-pro-list">
