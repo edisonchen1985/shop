@@ -1078,6 +1078,7 @@ class FlowController extends CommonController {
 
             /* 返回收货人页面代码 */
             $this->assign('real_goods_count', model('Order')->exist_real_goods(0, $flow_type) ? 1 : 0 );
+            $this->assign('real_goods_count', 1 );//购物车中存在实体商品显示国家和地区
         } else {
             /*  保存收货人信息      */
             $consignee = array(
