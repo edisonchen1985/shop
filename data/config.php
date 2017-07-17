@@ -1,6 +1,6 @@
 <?php
 // database host
-$db_host   = "localhost:3306";
+$db_host   = "127.0.0.1:3306";
 
 // database name
 $db_name   = "xingsom";
@@ -30,6 +30,6 @@ define('AUTH_KEY', 'this is a key');
 
 define('OLD_AUTH_KEY', '');
 
-define('API_TIME', '2017-06-17 12:14:23');
+define('API_TIME', '2017-07-17 13:11:30');
 
 ?>
