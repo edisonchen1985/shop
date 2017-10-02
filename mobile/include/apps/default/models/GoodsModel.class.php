@@ -729,4 +729,32 @@ class GoodsModel extends BaseModel {
         return $res;
     }
 
+     /**
+     * 获得商品假的销售数量
+     *
+     */
+    function get_fake_sale_count($goods_id) {
+        $sql = "SELECT sales_volume as amount FROM " . $this->pre . "goods WHERE goods_id='$goods_id' ";
+
+        $res = $this->row($sql);
+        return intval($res['amount']);
+    }
+    /**
+     * 更新商品假的销售数量
+     *
+     */
+    function update_sale_count() {
+        $sql = "SELECT *  FROM " . $this->pre . "goods  ";
+
+        $res = $this->query($sql);
+        foreach ($res as $key => $value) {
+        	# code...
+        	$goods_id = $value['goods_id'];
+        	$num = rand(10,100);
+        	$sql = "UPDATE ".$this->pre . "goods   SET sales_volume = $num WHERE goods_id = $goods_id  ";
+
+        	$res = $this->query($sql);
+        }
+    }
+
 }

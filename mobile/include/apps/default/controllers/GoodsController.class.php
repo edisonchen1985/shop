@@ -144,7 +144,9 @@ class GoodsController extends CommonController {
            
         // 当前系统时间
         $this->assign('now_time', gmtime());
-        $this->assign('sales_count', model('GoodsBase')->get_sales_count($this->goods_id));
+        //$this->assign('sales_count', model('GoodsBase')->get_sales_count($this->goods_id));
+	//fake amount
+        $this->assign('sales_count', model('Goods')->get_fake_sale_count($this->goods_id));
         $this->assign('image_width', C('image_width'));
         $this->assign('image_height', C('image_height'));
         $this->assign('id', $this->goods_id);
@@ -248,6 +250,10 @@ class GoodsController extends CommonController {
             $res ['result'] = price_format($shop_price * $number);
         }
         die(json_encode($res));
+    }
+    public function update_fake(){
+
+         //model('Goods')->update_sale_count();
     }
 
 }
