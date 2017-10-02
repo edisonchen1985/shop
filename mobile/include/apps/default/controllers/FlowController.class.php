@@ -1481,9 +1481,7 @@ class FlowController extends CommonController {
                 $curl = curl_init();
                 curl_setopt($curl,CURLOPT_URL,"http://www.xingsom.com/data/index.php/Home/Photo/attachData");
                 curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-                // post数据
             　　curl_setopt($curl, CURLOPT_POST, 1);
-            　　// post的变量
                 $post_data = array("open_id"=>$open_id_result['openid']);
             　　curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
                 $result = curl_exec($curl);
