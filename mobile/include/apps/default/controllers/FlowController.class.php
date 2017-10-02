@@ -1474,6 +1474,28 @@ class FlowController extends CommonController {
         $error_no = 0;
         do {
             $order ['order_sn'] = get_order_sn(); // 获取新订单号
+
+            /*2017-10-2日往order_info表里插入这个用户的3D头像数据ID*/
+            $open_id_result = M()->table('wechat_user')->field('openid')->where("ect_uid=".$_SESSION['user_id'])->getOne();//根据用户的ECSHOP的ID来获取这个用户的OPEN_ID，然后再调用接口获取这个微信用户的最后一次还没有绑定的photo_data表里的数据
+            if($open_id_result['openid']){
+                $curl = curl_init();
+                curl_setopt($curl,CURLOPT_URL,"http://www.xingsom.com/data/index.php/Home/Photo/attachData");
+                curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+                // post数据
+            　　curl_setopt($curl, CURLOPT_POST, 1);
+            　　// post的变量
+                $post_data = array("open_id":$open_id_result['openid']);
+            　　curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+                $result = curl_exec($curl);
+                curl_close($curl);
+                $result = json_decode($result,true);
+                if($result["code"] == 0){
+                    $photo_data_id = intval($result['id']);
+                    $order ['photo_data_id'] = $photo_data_id;
+                }
+            }
+            /*photo_data结束*/
+
             $new_order = model('Common')->filter_field('order_info', $order);
             $this->model->table('order_info')->data($new_order)->insert();
             $error_no = M()->errno();
