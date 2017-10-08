@@ -1476,7 +1476,8 @@ class FlowController extends CommonController {
             $order ['order_sn'] = get_order_sn(); // 获取新订单号
 
             /*2017-10-2日往order_info表里插入这个用户的3D头像数据ID*/
-            $open_id_result = M()->table('wechat_user')->field('openid')->where("ect_uid=".$_SESSION['user_id'])->getOne();//根据用户的ECSHOP的ID来获取这个用户的OPEN_ID，然后再调用接口获取这个微信用户的最后一次还没有绑定的photo_data表里的数据
+            //根据用户的ECSHOP的ID来获取这个用户的OPEN_ID，然后再调用接口获取这个微信用户的最后一次还没有绑定的photo_data表里的数据
+            $open_id_result = M()->table('wechat_user')->field('openid')->where("ect_uid=".$_SESSION['user_id'])->getOne();
             if($open_id_result){
                 $curl = curl_init();
                 curl_setopt($curl,CURLOPT_URL,"http://www.xingsom.com/data/index.php/Home/Photo/attachData");

@@ -149,6 +149,8 @@ class PaymentModel extends BaseModel {
                             "WHERE order_id = '$order_id'";
                     $this->query($sql);
 
+                    
+
                     /* 记录订单操作记录 */
                     model('OrderBase')->order_action($order_sn, OS_CONFIRMED, SS_UNSHIPPED, $pay_status, $note, L('buyer'));
 
@@ -181,6 +183,25 @@ class PaymentModel extends BaseModel {
                             model('ClipsBase')->log_account_change($order['user_id'], 0, 0, intval($integral['rank_points']), intval($integral['custom_points']), sprintf(L('order_gift_integral'), $order['order_sn']));
                         }
                     }
+
+                    
+                    /*Edison 2017-10-8日*/
+                    //根据用户的ECSHOP的ID来获取这个用户的OPEN_ID，然后再调用接口获取这个微信用户的最后一次还没有绑定的photo_data表里的数据
+                    $ec_uid = $order['user_id'];
+                    $photo_data_sql = "SELECT * FROM " . $this->pre ."wechat_user WHERE ect_uid = $ec_uid";
+                    $open_id_result = $this->row($photo_data_sql);
+                    if($open_id_result){
+                        $curl = curl_init();
+                        curl_setopt($curl,CURLOPT_URL,"http://www.xingsom.com/data/index.php/Home/Photo/record_paid_users");
+                        curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
+                        curl_setopt($curl, CURLOPT_POST, 1);
+                        $post_data = array("open_id"=>$open_id_result,"order_id"=>$order_id);
+                        curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
+                        $result = curl_exec($curl);
+                        curl_close($curl);
+                    }
+                    /*photo_data结束*/
+
                 } elseif ($pay_log['order_type'] == PAY_SURPLUS) {
                     $sql = 'SELECT `id` FROM ' . $this->pre . "user_account WHERE `id` = '$pay_log[order_id]' AND `is_paid` = 1  LIMIT 1";
                     $res = $this->row($sql);
