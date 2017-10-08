@@ -184,7 +184,7 @@ class PaymentModel extends BaseModel {
                         }
                     }
 
-                    
+
                     /*Edison 2017-10-8日*/
                     //根据用户的ECSHOP的ID来获取这个用户的OPEN_ID，然后再调用接口获取这个微信用户的最后一次还没有绑定的photo_data表里的数据
                     $ec_uid = $order['user_id'];
@@ -195,7 +195,7 @@ class PaymentModel extends BaseModel {
                         curl_setopt($curl,CURLOPT_URL,"http://www.xingsom.com/data/index.php/Home/Photo/record_paid_users");
                         curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
                         curl_setopt($curl, CURLOPT_POST, 1);
-                        $post_data = array("open_id"=>$open_id_result,"order_id"=>$order_id);
+                        $post_data = array("open_id"=>$open_id_result['openid'],"order_id"=>$order_id);
                         curl_setopt($curl, CURLOPT_POSTFIELDS, $post_data);
                         $result = curl_exec($curl);
                         curl_close($curl);
