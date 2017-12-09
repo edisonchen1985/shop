@@ -141,9 +141,10 @@ elseif ($_REQUEST['act'] == 'info')
         admin_priv('order_view');
     }
     /* Edison 查询ecs_photo_users表里的此条订单对应的用户的3D头像文件，如果存在则显示在页面上 */
-    $sql = "SELECT obj_file, img_file,ori_file FROM " . $ecs->table('photo_users') . " WHERE order_id = '$_REQUEST['order_id']'";
-    $photo_users_files = $db->getOne($sql);
+    $sql = "SELECT obj_file, img_file,ori_file FROM " . $ecs->table('photo_users') . " WHERE order_id = '$_REQUEST[order_id]'";
+    $photo_users_files = $db->getAll($sql);
     if($photo_users_files){
+        $photo_users_files = $photo_users_files[0];
         $smarty->assign('photo_users_files', $photo_users_files);
         $smarty->assign('obj_file', $photo_users_files['obj_file']);
         $smarty->assign('img_file', $photo_users_files['img_file']);

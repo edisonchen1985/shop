@@ -175,9 +175,9 @@
   {if $photo_users_files}
     <tr>
       <td><div align="right"><strong>用户上传原始照片</strong></div></td>
-      <td><img src="{$ori_file}"></td>
+      <td><a href="{$ori_file}" download="">{$ori_file}</a></td>
       <td><div align="right"><strong>生成的OBJ文件</strong></div></td>
-      <td>{$obj_file}</td>
+      <td><a href="{$obj_file}" download="">{$obj_file}</a></td>
     </tr>
   {/if}
 </table>
