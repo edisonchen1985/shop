@@ -38,7 +38,7 @@ $modules['02_cat_and_goods']['52_virtual_card_change'] = 'virtual_card.php?act=c
 $modules['02_cat_and_goods']['goods_auto']             = 'goods_auto.php?act=list';
 
 $modules['11_system']['website']  = 'website.php?act=list';//ecmoban
-
+/*隐藏促销管理
 $modules['03_promotion']['02_snatch_list']          = 'snatch.php?act=list';
 $modules['03_promotion']['04_bonustype_list']       = 'bonus.php?act=list';
 $modules['03_promotion']['06_pack_list']            = 'pack.php?act=list';
@@ -51,6 +51,7 @@ $modules['03_promotion']['13_wholesale']            = 'wholesale.php?act=list';
 $modules['03_promotion']['14_package_list']         = 'package.php?act=list';
 //$modules['03_promotion']['ebao_commend']            = 'ebao_commend.php?act=list';
 $modules['03_promotion']['15_exchange_goods']       = 'exchange_goods.php?act=list';
+*/
 
 
 $modules['04_order']['02_order_list']               = 'order.php?act=list';
